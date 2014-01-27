@@ -1,4 +1,3 @@
-
 #**Lab 15: Using the admin console (Estimated time: 15 minutes)**
 
 
@@ -26,8 +25,8 @@ However, by default the admin console is restricted so that it will not allow ex
 
 Open your favorite web browser and go to the following URL:
 
-	http://broker.hosts.example.com/admin-console
-	
+    http://broker.hosts.example.com/admin-console
+    
 Once you enter the above URL, you will the admin console *System Overview* dashboard.
 
 ![](http://training.runcloudrun.com/ose2/adminconsole1.png)

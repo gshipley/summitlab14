@@ -1,3 +1,4 @@
+
 #**Lab 4: Verifying the installation (Estimated time: 15 minutes)**
 
 **Server used:**
@@ -15,13 +16,13 @@
 	
 ##**Rebooting the hosts**
 
-Congratulations, you have just installed OpenShift Enterprise 2.0!  However, before preceding any further in the lab manual we need to verify that the installation was successful.  There are a couple of utilities that we can use to help with this task.  The first thing we want to check is that everything was installed and configured correctly to ensure that all services will be present after a reboot of the hosts.  To ensure that all services are started in the correct order, reboot the broker host first.  SSH to your broker host and enter in the following command.
+Congratulations! You have just installed OpenShift Enterprise 2.0.  However, before preceding any further in the lab manual, we need to verify that the installation was successful.  There are a couple of utilities that we can use to help with this task.  The first thing we want to check is that everything was installed and configured correctly to ensure that all services will be present after a reboot of the hosts.  To ensure that all services are started in the correct order, reboot the broker host first.  SSH to your broker host and enter in the following command.
 
 **Note:** Perform the following command on the broker host.
 
 	# shutdown -r now
 
-After issuing this command, it is normal and expected that your SSH session to the broker host will be closed.  Once your sessions has closed, wait a minute to allow time for the system to restart and then SSH in to the broker host again.  After you have verified that the broker host has been rebooted and able to accept SSH connections, it is safe to reboot the node host.
+After issuing this command, it is normal and expected that your SSH session to the broker host will be closed.  Once your session has closed, wait a minute to allow time for the system to restart, and then SSH in to the broker host again.  After you have verified that the broker host has been rebooted and is able to accept SSH connections, it is safe to reboot the node host.
 
 SSH to your node host and enter in the following command:
 
@@ -34,7 +35,7 @@ Wait a minute or two for your node host to come back online.  You can verify tha
 ##**Verifying the installation**
 
 ###**Verifying DNS**
-Now that our broker and node hosts have been restarted, we can verify that some of the core services have started upon system boot.  The first one want to test is *bind*.  In order to test that *bind* was started successfully, enter in the following command:
+Now that our broker and node hosts have been restarted, we can verify that some of the core services have started upon system boot.  The first one want to test is the named service, provided by *BIND*.  In order to test that *BIND* was started successfully, enter in the following command:
 
 	# service named status
 	
@@ -54,7 +55,7 @@ You should see information similar to the following:
 	server is up and running
 	named (pid  1106) is running...
 	
-If *bind* is up and running we can be assured that there are no syntax errors in our zone file(s).  
+If *BIND* is up and running we can be assured that there are no syntax errors in our zone file(s).  
 
 The next aspect of DNS that we can verify is the actual database for our DNS records.  There should be two database files that contain the domain information for our hosts.  Let's verify that the DNS information for our *hosts.example.com* has been setup correctly with the following command:
 	
@@ -79,29 +80,29 @@ The output should look similar to the following.
 	broker			A	209.132.178.67
 	node1			A	209.132.178.69
 	
-Verify that you have entries for both the broker and the node host and listed above.  Once you have verified this, take a look at the database for apps.example.com.db to verify that is has an *NS* entry for *broker.hosts.example.com*:
+Verify that you have entries for both the broker and the node host listed in the output of the *cat* command.  Once you have verified this, take a look at the database for apps.example.com.db to verify that is has an *NS* entry for *broker.hosts.example.com*:
 
 	
 	# cat /var/named/dynamic/apps.example.com.db
 	
 ###**Verifying DNS resolution**
 
-One of the most common problems that students encounter is improper host name resolution for OpenShift Enterprise.  If this error occurs the broker will not be able to contact the node hosts and vice versa.  Both the broker and node host should be using your broker.hosts.example.com IP address for DNS resolution.  To verify this, view the */etc/resolv.conf* file both the broker and node host to verify it is pointed to the correct *BIND* server.
+One of the most common problems that students encounter is improper host name resolution for OpenShift Enterprise.  If this error occurs, the broker will not be able to contact the node hosts and vice versa.  Both the broker and node host should be using your broker.hosts.example.com host for DNS resolution.  To verify this, view the */etc/resolv.conf* file on both the broker and node host to verify it is pointed to the correct *BIND* server.
 
 	# cat /etc/resolv.conf
 	
-If everything with DNS is setup correctly, you should be able to ping node1.hosts.example.com from the broker and receive a response as shown below:
+If everything with DNS is setup correctly, you should be able to ping node.hosts.example.com from the broker and receive a response as shown below:
 
-	# ping node1.hosts.example.com
+	# ping node.hosts.example.com
  
- 	PING node1.hosts.example.com (209.132.178.69) 56(84) bytes of data.
+ 	PING node.hosts.example.com (209.132.178.69) 56(84) bytes of data.
 	64 bytes from node.osop-local (209.132.178.69): icmp_seq=1 ttl=64 time=0.502 ms
 
 ###**Verifying ActiveMQ and MCollective**	
 
-ActiveMQ is a fully open source messenger service that is available for use across many different programming languages and environments. OpenShift Enterprise makes use of this technology to handle communications between the broker host and the node host in our deployment.  
+ActiveMQ is a fully open source messenger service that is available for use across many different programming languages and environments.  MCollective is a higher-level framework for remote job execution that communicates over ActiveMQ.  OpenShift Enterprise makes use of these technologies to handle communications between the broker host and the node host in our deployment.  
 
-The first thing we want to ensure is that the daemon is running.  Perform the following command on the broker host:
+The first thing we want to ensure is that the ActiveMQ daemon is running.  Perform the following command on the broker host:
 
 **Note:** Execute this command on the broker host
 
@@ -123,15 +124,15 @@ The long random string is the password for the *admin* user.  Let's verify the t
 	
 You should see a list of topics scroll by on your screen.
 
-Now that we know that ActiveMQ is up and running and has topics, let's verify the MCollective is able to communicate between the broker and the node hosts.  To very this, use the *oo-mco-ping* command.
+Now that we know that ActiveMQ is up and running and has topics, let's verify that MCollective is able to communicate between the broker and the node hosts.  To very this, use the *oo-mco ping* command.
 
 **Note:** Execute the following on the broker host
 
 	# oo-mco ping
 
-If MCollective is working correctly, you should see the following output:
+If MCollective is working correctly, you should see the following output (the time values will vary):
 
-	node1.hosts.example.com                  time=114.73 ms
+	node.hosts.example.com                  time=114.73 ms
 	
 	
 	---- ping statistics ----
@@ -150,4 +151,3 @@ When running the *oo-diagnostics* script at this time, it is expected to see som
 
 **Lab 4 Complete!**
 <!--BREAK-->
-

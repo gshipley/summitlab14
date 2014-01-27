@@ -1,5 +1,4 @@
-
-#**Lab 16: The DIY application type (Estimated time: 10 minutes)**
+#**Lab 17: The DIY application type (Estimated time: 10 minutes)**
 
 **Server used:**
 
@@ -12,13 +11,13 @@
 
 In addition to supporting Ruby, PHP, Perl, Python, and Java EE6, the OpenShift Enterprise environment supports the "Do it Yourself" or "DIY" application type. Using this application type, users can run just about any program that speaks HTTP.
 
-How this works is remarkably straightforward. The OpenShift Enterprise execution environment is a carefully secured Red Hat Enterprise Linux operating system on x64 systems. Thus, OpenShift Enterprise can run any binary that will run on RHEL 6.3 x64.
+How this works is remarkably straightforward. The OpenShift Enterprise execution environment is a carefully secured Red Hat Enterprise Linux operating system on x86_64 systems. Thus, OpenShift Enterprise can run any binary that will run on RHEL 6.3 x86_64.
 
-The way that OpenShift Enterprise DIY runtimes interfaces your application to the outside world is by creating an HTTP proxy specified by the environment variables *OPENSHIFT_DIY_IP* and *OPENSHIFT_DIY_PORT*.  All your application has to do is bind and listen on that address and port. HTTP requests will come into the OpenShift Enterprise environment, which will proxy those requests to your application. Your application will reply with HTTP responses, and the OpenShift Enterprise environment will relay those responses back to your users.
+The way that the OpenShift Enterprise DIY runtime interfaces your application to the outside world is by creating an HTTP proxy specified by the environment variables *OPENSHIFT_DIY_IP* and *OPENSHIFT_DIY_PORT*.  All your application has to do is bind and listen on that address and port. HTTP requests will come into the OpenShift Enterprise environment, which will proxy those requests to your application. Your application will reply with HTTP responses, and the OpenShift Enterprise environment will relay those responses back to your users.
 
 Your application will be executed by the .openshift/action_hooks/start script, and will be stopped by the .openshift/action_hooks/stop script.
 
-**Note:** DIY applications are unsupported but is a great way for developers to try out unsupported languages, frameworks, or middleware that doesn’t ship as an official OpenShift Enterprise cartridge.
+**Note:** DIY applications are unsupported but are a great way for developers to try out unsupported languages, frameworks, or middleware that don't ship as official OpenShift Enterprise cartridges.
 
 ##**Creating a DIY application type**
 
@@ -65,7 +64,7 @@ Now that we have our application created, we can begin the deployment of our cus
 	
 ##**Deploying application code**
 
-Instead of spending time in this lab with writing a server runtime, we are going to use an existing one that is available on the OpenShift github page.  This application code is written in Java and consists of a single MyHttpServer main class.  Since this source code lives on the github OpenShift project page, we need to add the remote github repository and then pull the remote source code while at the same time overwriting the existing source code we have in our DIY application directory.
+Instead of spending time in this lab with writing a server runtime, we are going to use an existing one that is available on the OpenShift Github page.  This application code is written in Java and consists of a single MyHttpServer main class.  Since this source code lives on the Github OpenShift project page, we need to add the remote Github repository and then pull the remote source code while at the same time overwriting the existing source code we have in our DIY application directory.
 
 	$ git remote add upstream git://github.com/openshift/openshift-diy-java-demo.git
 	$ git pull -s recursive -X theirs upstream master
@@ -73,21 +72,21 @@ Instead of spending time in this lab with writing a server runtime, we are going
 	
 ##**Verify the DIY application is working**
 
-Once the java example has been pushed to your OpenShift Enterprise gear, open up a web browser and point to the following URL:
+Once the Java example has been pushed to your OpenShift Enterprise gear, open up a web browser and point to the following URL:
 
 	http://myjavademo-ose.apps.example.com/index.html
 	
 **Note:** Make sure to include the index.html file at the end of the URL.
 
-If the application was deployed correctly, you should see a *Hello DIY World!* message.  This little http java server will serve any files found in your application's html directory, so you can add files or make changes to them, push the contents and see those reflected in your browser.
+If the application was deployed correctly, you should see a *Hello DIY World!* message.  This little HTTP Java server will serve any files found in your application's html directory, so you can add files or make changes to them, push the contents, and see those reflected in your browser.
 
 ##**Under the covers**
 
 The DIY cartridge provides a number of hooks that are called during the lifecycle actions of the application. The hooks available to you for customization are found in the .openshift/action_hooks directory of your application repository. 
 
-For this application, all that has been customized are the start and stop scripts. They simply launch the MyHttpServer class using Java, and performs a *wget* call to have the MyHttpServer stop itself:
+For this application, all that has been customized are the start and stop scripts. They simply launch the MyHttpServer class using Java and perform a *wget* call to have the MyHttpServer stop itself:
 
-	cat .openshift/action_hooks/start 
+	$ cat .openshift/action_hooks/start 
 	#!/bin/bash
 	# The logic to start up your application should be put in this
 	# script. The application will work only if it binds to
@@ -96,7 +95,7 @@ For this application, all that has been customized are the start and stop script
 	cd $OPENSHIFT_REPO_DIR
 	nohup java -cp bin test.MyHttpServer >${OPENSHIFT_DIY_LOG_DIR}/MyHttpServer.log 2>&1 &
 	
-	[24](ironmaiden:diy) > cat .openshift/action_hooks/stop
+	$ cat .openshift/action_hooks/stop
 	#!/bin/bash
 	# The logic to stop your application should be put in this script.
 	wget http://${OPENSHIFT_INTERNAL_IP}:${OPENSHIFT_INTERNAL_PORT}?action=stop
@@ -117,5 +116,5 @@ Verify that you can view this file by going to the following URL:
 
 
 
-**Lab 16 Complete!**
+**Lab 17 Complete!**
 <!--BREAK-->

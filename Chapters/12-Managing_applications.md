@@ -11,9 +11,9 @@
 
 ## **Start/Stop/Restart OpenShift Enterprise application**
 
-OpenShift Enterprise provides commands to start,stop, and restart an application. If at any point in the future you decide that an application should be stopped for some maintenance, you can stop the application using the *rhc app stop* command. After making necessary maintenance tasks you can start the application again using the *rhc app start* command. 
+OpenShift Enterprise provides commands to start, stop, and restart an application. If at any point in the future you decide that an application should be stopped for some maintenance, you can stop the application using the *rhc app stop* command. After making necessary maintenance tasks, you can start the application again using the *rhc app start* command. 
 
-To stop an application execute the following command:
+To stop an application, execute the following command:
 
 	$ rhc app stop firstphp
 	
@@ -61,7 +61,7 @@ You can also stop and start the application in one command as shown below.
 
 ##**Viewing application details**
 
-All of the details about an application can be viewed by the *rhc app show* command. This command will list when the application was created, unique identifier of the application, git URL, SSH URL, and other details as shown below:
+All of the details about an application can be viewed by the *rhc app show* command. This command will list when the application was created, the unique identifier of the application, Git URL, SSH URL, and other details as shown below:
 
 
 	$ rhc app show firstphp
@@ -85,7 +85,7 @@ All of the details about an application can be viewed by the *rhc app show* comm
 
 ##**Viewing application status**
 
-The state of application gears can be viewed by passing the *state* switch to the *rhc app show* command as shown below:
+The state of application gears can be viewed by passing the *state* switch to the *rhc app show* command, as shown below:
 
 	rhc app show --state firstphp
 	Password: ****
@@ -97,10 +97,10 @@ The state of application gears can be viewed by passing the *state* switch to th
 
 ##**Cleaning up an application**
 
-As users start developing an application and deploying changes to OpenShift Enterprise, the application will start consuming some of the available disk space that is part of their quota. This space is consumed by the git repository, log files, temp files, and unused application libraries. OpenShift Enterprise provides a disk space cleanup tool to help users manage the application disk space. This command is also available under *rhc app* and performs the following functions:
+As a user starts developing an application and deploying changes to OpenShift Enterprise, the application will start consuming some of the available disk space that is part of their quota. This space is consumed by the Git repository, log files, temporary files, and unused application libraries. OpenShift Enterprise provides a disk-space cleanup tool to help users manage the application disk space. This command is also available under *rhc app* and performs the following functions:
 
-* Runs the *git gc* command on the application's remote git repository
-* Clears the application's /tmp and log file directories. These are specified by the application's *OPENSHIFT_LOG_DIR** and *OPENSHIFT_TMP_DIR* environment variables.
+* Runs the *git gc* command on the application's remote Git repository.
+* Clears the application's /tmp and log file directories. These are specified by the application's *OPENSHIFT_LOG_DIR* and *OPENSHIFT_TMP_DIR* environment variables.
 * Clears unused application libraries. This means that any library files previously installed by a *git push* command are removed.
 
 To clean up the disk space on your application gear, run the following command:
@@ -114,18 +114,18 @@ After running this command you should see the following output:
 
 ##**SSH to application gear**
 
-OpenShift allows remote access to the application gear by using the Secure Shell protocol (SSH). [Secure Shell (SSH)](http://en.wikipedia.org/wiki/Secure_Shell) is a network protocol for securely getting access to a remote computer.  SSH uses RSA public key cryptography for both the connection and authentication. SSH provides direct access to the command line of your application gear on the remote server. After you are logged in on the remote server, you can use the command line to directly manage the server, check logs and test quick changes. OpenShift Enterprise uses SSH for:
+OpenShift allows remote access to the application gear by using the Secure Shell protocol (SSH). [Secure Shell (SSH)](http://en.wikipedia.org/wiki/Secure_Shell) is a network protocol for securely getting access to a remote computer.  SSH uses RSA public key cryptography for both the connection and authentication. SSH provides direct access to the command line of your application gear on the remote server. After you are logged in on the remote server, you can use the command line to directly manage the server, check logs, and test quick changes. OpenShift Enterprise uses SSH for:
 
 * Performing Git operations
 * Remote access your application gear
 
-The SSH keys were generated and uploaded to OpenShift Enterprise by rhc setup command we executed in a previous lab. You can verify that SSH keys are uploaded by logging into the OpenShift Enterprise web console and clicking on the "Settings" tab as shown below.
+The SSH keys were generated and uploaded to OpenShift Enterprise by rhc setup command we executed in a previous lab. You can verify that SSH keys are uploaded by logging into the OpenShift Enterprise management console and clicking on the "Settings" tab, as shown below.
 
 ![](http://training.runcloudrun.com/ose2/sshKeys-webconsole.png)
 
 **Note:** If you don't see an entry under "Public Keys" then you can either upload the SSH key by clicking on "Add a new key" or run the *rhc setup* command again. This will create a SSH key pair in <User.Home>/.ssh folder and upload the public key to the OpenShift Enterprise server.
 
-After the SSH keys are uploaded, you can SSH into the application gear as shown below.  SSH is installed by default on most UNIX like platforms such as Mac OSX and Linux. For windows, you can use [PuTTY](http://www.chiark.greenend.org.uk/~sgtatham/putty/).  Instructions for installing PuTTY can be found [on the OpenShift website](https://openshift.redhat.com/community/page/install-and-setup-putty-ssh-client-for-windows). 
+After the SSH keys are uploaded, you can SSH into the application gear as shown below.  SSH is installed by default on most UNIX-like platforms, such as Mac OSX and Linux.  For Windows, you can use [PuTTY](http://www.chiark.greenend.org.uk/~sgtatham/putty/).  Instructions for installing PuTTY can be found [on the OpenShift website](https://openshift.redhat.com/community/page/install-and-setup-putty-ssh-client-for-windows). 
 
 Although you can SSH in by using the standard ssh command line utility, the OpenShift client tools includes a ssh utility that makes the process of logging in to your application even easier.  To SSH to your gear, execute the following command:
 
@@ -154,7 +154,7 @@ You can get the SSH URL by running *rhc app show* command as shown below:
 	    Git URL   = ssh://e9e92282a16b49e7b78d69822ac53e1d@firstphp-ose.apps.example.com/~/git/firstphp.git/
 	  Cartridges
 	  ==========
-	    php-5.3```
+	    php-5.3
 
 Now you can ssh into the application gear using the SSH URL shown above:
 
@@ -245,7 +245,7 @@ Now that you know how to view log files by using the *rhc tail* command it is al
 
 ##**Viewing disk quota for an application**
 
-In a previous lab, we configured the application gears to have a disk usage quota.  You can view the quota of your currently running gear by connecting to the gear node host via SSH as discussed previously in this lab.  Once you are connected to your application gear, enter the following command:
+In a previous lab, we configured the application gears to have a disk-usage quota.  You can view the quota of your currently running gear by connecting to the gear node host via SSH as discussed previously in this lab.  Once you are connected to your application gear, enter the following command:
 
 	$ quota -s
 	
@@ -262,23 +262,23 @@ To view how much disk space your gear is actually using, you can also enter in t
 
 ##**Adding a custom domain to an application using the command line**
 
-OpenShift Enterprise supports the use of custom domain names for an application.  For example, suppose we want to use http://www.somesupercooldomain.com domain name for the application *firstphp* we created in a previous lab. The first thing you need to do before setting up a custom domain name is to buy the domain name from domain registration provider.
+OpenShift Enterprise supports the use of custom domain names for an application.  For example, suppose we want to use http://www.somesupercooldomain.com for the application *firstphp* that we created in a previous lab. The first thing you need to do before setting up a custom domain name is to buy the domain name from domain registration provider.
 
-After buying the domain name, you have to add a [CName record](http://en.wikipedia.org/wiki/CNAME_record) for the custom domain name.  Once you have created the CName record, you can let OpenShift Enterprise know about the CName by using the *rhc alias* command.
+After buying the domain name, you have to add a [CNAME record](http://en.wikipedia.org/wiki/CNAME_record) for the custom domain name.  Once you have created the CNAME record, you can let OpenShift Enterprise know about the CNAME by using the *rhc alias* command.
 
 	$ rhc alias add firstphp www.mycustomdomainname.com
 	
 Technically, what OpenShift Enterprise has done under the hood is set up a Vhost in Apache to handle the custom URL.
 
-##**Adding a custom domain to an application using the web console**
+##**Adding a custom domain to an application using the management console**
 
-The OpenShift web console now allows you to customize your application's domain host url without having to use the command line tools.  Point your browser to *broker.hosts.example.com* and authenticate.  After you have authenticated to the web console, click on the *Applications* tab at the top of the screen.
+The OpenShift management console now allows you to customize your application's domain host URL without having to use the command line tools.  Point your browser to *broker.hosts.example.com* and authenticate.  After you have authenticated to the management console, click on the *Applications* tab at the top of the screen.
 
 You should see the firstphp application listed:
 
 ![](http://training.runcloudrun.com/ose2/domainName.png)
 
-Click on the *change* link next to your application name.  On the following page, you can specifiy the custom domain name for your application.  Go ahead and add a custom domain name of *www.openshiftrocks.com* and click the save button.
+Click on the *change* link next to your application name.  On the following page, you can specify the custom domain name for your application.  Go ahead and add a custom domain name of *www.openshiftrocks.com* and click the save button.
 
 ![](http://training.runcloudrun.com/ose2/customDomainName.png)
 
@@ -303,7 +303,7 @@ If the alias was added correctly, you should see the following output:
 	    Gears: 1 small
 
 
-If you point your web browser to www.openshiftrocks.com, you will notice that it does not work.  This is because the domain name has not been setup with a dns registry.  In order to verify that the vhost was added, add an entry in your */etc/hosts* file on your local machine.
+If you point your web browser to www.openshiftrocks.com, you will notice that it does not work.  This is because the domain name has not been setup with a DNS registry.  In order to verify that the vhost was added, add an entry in your */etc/hosts* file on your local machine.
 
 	$ sudo vi /etc/hosts
 
@@ -311,13 +311,13 @@ Add the following entry, replacing the IP address with the address of your node 
 
 	209.132.178.87  www.openshiftrocks.com
 
-Once you have edited and saved the file, open your browser and go to the *www.openshiftrocks.com* URL.  You should see the application.
+Once you have edited and saved the file, open your browser and go to your custom domain name.  You should see the application.
 
 Once you have verified that the vhost was added correctly by viewing the site in your web browser, delete the line from the */etc/hosts* file.
 
 ##**Backing up an application**
 
-Use the *rhc snapshot save* command to create backups of your OpenShift Enterprise application. This command creates a gzipped tar file of your application and of any locally-created log and data files.  This snapshot is downloaded to your local machine and the directory structure that exists on the server is maintained in the downloaded archive.
+Use the *rhc snapshot save* command to create backups of your OpenShift Enterprise application. This command creates a gzipped tar file of your application and of any locally-created log and data files.  This snapshot is downloaded to your local machine.  The directory structure that exists on the server is maintained in the downloaded archive.
 
 	$ rhc snapshot save firstphp
 	Password: ****
@@ -331,13 +331,13 @@ Use the *rhc snapshot save* command to create backups of your OpenShift Enterpri
 	RESULT:
 	Success
 
-After the command successfully finishes you will see a file named firstphp.tar.gz in the directory where you executed the command. The default filename for the snapshot is $Application_Name.tar.gz. You can override this path and filename with the -f or --filepath option.
+After the command successfully finishes, you will see a file named firstphp.tar.gz in the directory where you executed the command. The default filename for the snapshot is $Application_Name.tar.gz. You can override this path and filename with the -f or --filepath option.
 
 **NOTE**: This command will stop your application for the duration of the backup process.
 
 Now that we have our application snapshot saved, edit the *index.php* file in your firstphp application and change the *Welcome to OpenShift Enterprise* \<h1> tag to say *Welcome to OpenShift Enterprise before restore*.
 
-Once you have made this change, peform the following to push your changes to your application gear:
+Once you have made this change, perform the following command to push your changes to your application gear:
 
 	$ git commit -am "Added message"
 	$ git push
@@ -346,7 +346,7 @@ Verify that changes are reflected in your web browser.
 
 ##**Restoring a backup**
 
-Not only you can take a backup of an application but you can also restore a previously saved snapshot.  This form of the *rhc* command restores the git repository, as well as the application data directories and the log files found in the specified archive. When the restoration is complete, OpenShift Enterprise runs the deployment script on the newly restored repository.  To restore an application snapshot, run the following command:
+Not only you can take a backup of an application, but you can also restore a previously saved snapshot.  This form of the *rhc* command restores the Git repository, as well as the application data directories and the log files found in the specified archive. When the restoration is complete, OpenShift Enterprise runs the deployment script on the newly restored repository.  To restore an application snapshot, run the following command:
 
 	$ rhc snapshot restore firstphp -f firstphp.tar.gz
 
@@ -373,7 +373,7 @@ If the restore process worked correctly, you should see the restored application
 
 ##**Deleting an application**
 
-You can delete an OpenShift Enterprise application by executing the *rhc app delete* command. This command deletes your application and all of its data on the OpenShift Enterprise server but leaves your local directory intact. This operation can not be undone so use it with caution. 
+You can delete an OpenShift Enterprise application by executing the *rhc app delete* command. This command deletes your application and all of its data on the OpenShift Enterprise server but leaves your local directory intact. This operation can not be undone, so use it with caution. 
 
 	$ rhc app delete someAppToDelete
 	
@@ -397,9 +397,9 @@ There is another variant of this command which does not require the user to conf
 
 ##**Viewing a thread dump of an application**
 
-**Note:** The following sections requires a Ruby or JBoss application type.  Since we have not created one yet in this class, read through the material below but don’t actually perform the commands at this time.
+**Note:** The following sections requires a Ruby or JBoss application type.  Since we have not created one yet in this class, read through the material below but don't actually perform the commands at this time.
 
-You can trigger a thread dump for Ruby and JBoss applications using the *rhc threaddump* command. A thread dump is a snapshot of the state of all threads that are part of the runtime process.  If an application appears to have stalled or is running out of resources, a thread dump can help reveal the state of the runtime, identify what might be causing any issues and ultimately to help resolve the problem. To trigger a thread dump execute the following command:
+You can trigger a thread dump for Ruby and JBoss applications using the *rhc threaddump* command. A thread dump is a snapshot of the state of all threads that are part of the runtime process.  If an application appears to have stalled or is running out of resources, a thread dump can help reveal the state of the runtime, identify what might be causing any issues, and ultimately help resolve the problem. To trigger a thread dump, execute the following command:
 
 	$ rhc threaddump ApplicationName
 	

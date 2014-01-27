@@ -1,6 +1,4 @@
-
-<!--BREAK-->
-#**Lab 19:  Using JBoss Tools (Estimated time: 30 minutes)**
+#**Lab 20:  Using JBoss Tools (Estimated time: 30 minutes)**
 
 **Server used:**
 
@@ -10,7 +8,7 @@
 
 * eclipse
 
-JBoss Tools is an umbrella project for a set of Eclipse plugins that supports JBoss and related technologies; there is support for OpenShift, Hibernate, JBoss AS, Drools, jBPM, JSF, (X)HTML, Seam, Maven, JBoss ESB, JBoss Portal and more...
+JBoss Tools is an umbrella project for a set of Eclipse plugins that supports JBoss and related technologies; there is support for OpenShift, Hibernate, JBoss AS, Drools, jBPM, JSF, (X)HTML, Seam, Maven, JBoss ESB, JBoss Portal and more.
 
 ##**Download and install Eclipse - Kepler**
 
@@ -26,7 +24,7 @@ and follow the instructions to install JBoss Tools 4.1 (Kepler).  While you are 
 
 ##**Create an OpenShift Enterprise application**
 
-Now that we have Eclipse Juno and JBoss Tools 4.0 installed, we can create an OpenShift Enterprise application without having the leave the comfort of our favorite IDE.  Click on the *OpenShift Applicaiton* link that is provided on the JBoss Central screen.  If you do not have this link, you can also select *file->new->other->OpenShift Application*.
+Now that we have Eclipse Juno and JBoss Tools 4.0 installed, we can create an OpenShift Enterprise application without having the leave the comfort of our favorite IDE.  Click on the *OpenShift Application* link that is provided on the JBoss Central screen.  If you do not have this link, you can also select *file->new->other->OpenShift Application*.
 
 ![](http://training.runcloudrun.com/images/jbosstools1.png)
 
@@ -34,7 +32,7 @@ Once you click on the link to create a new OpenShift Enterprise application, you
 
 ![](http://training.runcloudrun.com/images/jbosstools2.png)
 
-After clicking *next*, the JBoss Tools plugin will authenticate you to the broker host and present another dialog box to you.  On this dialog box, you have the option of creating a new application, or to use an existing one.  Since we already have a JBoss EAP application deployed, let’s select to *Use existing application* and click the *Browse* button.  After clicking the *Browse* button, a REST API call be made to the broker host to retrieve the existing applications that you already have deployed.  
+After clicking *next*, the JBoss Tools plugin will authenticate you to the broker host and present another dialog box to you.  On this dialog box, you have the option of creating a new application, or to use an existing one.  Since we already have a JBoss EAP application deployed, let's select to *Use existing application* and click the *Browse* button.  After clicking the *Browse* button, a REST API call will be made to the broker host to retrieve the existing applications that you already have deployed.  
 
 ![](http://training.runcloudrun.com/images/jbosstools3.png)
 
@@ -42,7 +40,7 @@ Highlight the *todo* application and click on the *Details...* button.  This wil
 
 ![](http://training.runcloudrun.com/images/jbosstools4.png)
 
-After clicking *Next* to use the existing *todo* application, Eclipse will ask you to create a new project or to use an existing one.  Let’s create a new one and set the correct location where we want to store the project files.
+After clicking *Next* to use the existing *todo* application, Eclipse will ask you to create a new project or to use an existing one.  Let's create a new one and set the correct location where we want to store the project files.
 
 ![](http://training.runcloudrun.com/images/jbosstools5.png)
 
@@ -77,11 +75,11 @@ For the next section of this lab, ensure that you click on *Start Forwarding* so
 
 ###**Adding PostgreSQL as an Eclipse data source**
 
-Download the latest PostgreSQL driver from the following location
+Download the latest PostgreSQL driver from the following location:
 
 	http://jdbc.postgresql.org/download.html
 	
-and save it to your local computer.  Once you have the file downloaded, click on the *Data Source Explorer* tab, right click on *Database Connection* and select *New*.  This will open the following dialog where you will want to select PostgreSQL:
+and save it to your local computer.  Once you have the file downloaded, click on the *Data Source Explorer* tab, right click on *Database Connection*, and select *New*.  This will open the following dialog where you will want to select PostgreSQL:
 
 ![](http://training.runcloudrun.com/images/db1.png)
 
@@ -94,7 +92,7 @@ Now that you have added the driver, the dialog box will display the available dr
 * User name: admin	
 * Password: The password supplied by OpenShift.  If you forgot this, use the *Environment Variables* utility provided by JBoss Tools.
 
-In order to verify that your port-forwarding and database connection is setup correctly, press the *test connection* button.  If your connection is failing, make sure that you have the correct authorization credentials and that port-fowarding is started via JBoss Tools.
+In order to verify that your port-forwarding and database connection are setup correctly, press the *test connection* button.  If your connection is failing, make sure that you have the correct authorization credentials and that port-fowarding is started via JBoss Tools.
 
 Once you have correctly added the database connection, you should now see the remote database from the OpenShift Enterprise node host available for use in your Eclipse IDE.
 
@@ -112,7 +110,7 @@ to the include JBoss Tools
 
 	<h2>Todo List Creation using Jenkins and JBoss Tools</h2>
 	
-Once you have made the source code change, save the contents of the file and then use the *Team* functionality by right clicking on your project.  Commit and push the changes to your OpenShift Enterprise server.  This push will follow the same workflow used previously by initiating a build on your Jenkins server.
+Once you have made the source code change, save the contents of the file and then use the *Team* functionality by right-clicking on your project.  Commit and push the changes to your OpenShift Enterprise server.  This push will follow the same workflow used previously by initiating a build on your Jenkins server.
 
 ![](http://training.runcloudrun.com/images/tools1.png)
 
@@ -126,5 +124,5 @@ Verify that your changes were deployed correctly by opening up a web browser and
 	
 ![](http://training.runcloudrun.com/images/tools3.png)
 
-**Lab 19 Complete!**
+**Lab 20 Complete!**
 <!--BREAK-->

@@ -1,29 +1,28 @@
-
 #**Appendix A - Troubleshooting**
 
 ##**Diagnostics script**
 
-Installing and configuring an OpenShift Enterprise PaaS can often fail due to simple mistakes in configuration files.  Fortunately,  the team provides an unsupported troubleshooting script that can diagnose most problems with an installation.  This script is located on the OpenShift Enterprise hosts is called *oo-diagnostics*.  
+Installing and configuring an OpenShift Enterprise PaaS can often fail due to simple mistakes in configuration files.  Fortunately,  the team provides an unsupported troubleshooting script that can diagnose most problems with an installation.  This script is located on the OpenShift Enterprise hosts and is called *oo-diagnostics*.  
 
 To run the command and check for errors, issue the following command:
 
-	# oo-diagnostics -v
-	
+    # oo-diagnostics -v
+    
 **Note:** Sometimes the script will fail at the first error and not continue processing.  In order to run a full check on your node, add the *--abortok* switch
-	
-	# oo-diagnostics -v --abortok
-	
-Under the covers, this script performs a lot of checks on your host as well as executing the existing *oo-accept-broker* and *oo-accept-node* commands on the respective host.
+    
+    # oo-diagnostics -v --abortok
+    
+Under the covers, this script performs a lot of checks on your host as well as executing the *oo-accept-broker* and *oo-accept-node* diagnostics commands, as appropriate for the type of host.
 
 ##**Unknown locale error when running *lokkit***
 
 If you get unknown locale error when running *lokkit*, run the following command:
 
-	# export LC_CTYPE="en_US.UTF-8"
+    # export LC_CTYPE="en_US.UTF-8"
 
 ##**Recovering failed nodes**
 
-A node host that fails catastrophically can be recovered if the gear directory /var/lib/openshift has been stored in a fault-tolerant way and can be recovered. In practice this scenario occurs rarely, especially when node hosts are virtual machines in a fault tolerant infrastructure rather than physical machines. 
+A node host that fails catastrophically can be recovered if the gear directory /var/lib/openshift has been stored in a fault-tolerant way and can be recovered. In practice, this scenario occurs rarely, especially when node hosts are virtual machines in a fault tolerant infrastructure rather than physical machines. 
 
 **Note: Do not start the MCollective service until you have completed the following steps.**
 
@@ -43,11 +42,14 @@ Reboot the new node host to activate all changes, start the gears, and allow MCo
 
 ##**Removing applications from a node**
 
-While trying to add a node to a district, a common error is that the node already has user applications on it.  In order to be able to add this node to a district, you will either need to move these applications to another node or delete the applications.  In this training class, it is suggested that you simply delete the application as we are working in a single node host configuration.  In order to remove a users application, issue the following commands:
+While trying to add a node to a district, a common error is that the node already has user applications on it.  In order to be able to add this node to a district, you will either need to move these applications to another node or delete the applications.  In this training class, it is suggested that you simply delete the application as we are working in a single node host configuration.  In order to remove a user's application as an administrator, issue the following commands:
 
-	# oo-admin-ctl-app -l username -a appname -c stop
-	# oo-admin-ctl-app -l username -a appname -c destroy
-	
-The above commands will stop the users application and them remove the application from the node.  If you want to preserve the application data, you should backup the application first using the snapshot tool that is part of the RHC command line tools.
+    # oo-admin-ctl-app -l username -a appname -c stop
+    # oo-admin-ctl-app -l username -a appname -c destroy
+    
+The above commands will stop the user's application and them remove the application from the node.  If you want to preserve the application data, you should backup the application first using the snapshot tool that is part of the RHC command line tools.
 
 <!--BREAK-->
+
+
+

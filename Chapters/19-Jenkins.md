@@ -1,5 +1,4 @@
-
-#**Lab 18:  Using Jenkins continuous integration (Estimated time: 30 minutes)**
+#**Lab 19:  Using Jenkins continuous integration (Estimated time: 30 minutes)**
 
 **Server used:**
 
@@ -16,12 +15,12 @@ Jenkins (https://wiki.jenkins-ci.org) is a full featured continuous integration 
 
 With Jenkins, you have access to a full library of plugins (https://wiki.jenkins-ci.org/display/JENKINS/Plugins) and a vibrant, thriving community of users who have discovered a new way to do development.
 
-There are many reasons why you would want to leverage Jenkins as a continuous integration server.  In the context of OpenShift Enterprise, some of the benefits are:
+There are many reasons why you would want to leverage Jenkins as a continuous integration server.  In the context of OpenShift Enterprise, some of the benefits include the following:
 
-* Archived build information
-* No application downtime during the build process
-* Failed builds do not get deployed (leaving the previous working version in place)
-* More resources to build your application as each Jenkins build spins up a new gear for short lived period of time
+* Archived build information.
+* No application downtime during the build process.
+* Failed builds do not get deployed (leaving the previous working version in place).
+* More resources to build your application, as each Jenkins build spins up a new gear for short-lived period of time.
 
 Jenkins includes a feature-rich web user interface that provides the ability to trigger builds, customize builds, manage resources, manage plugins, and many other features. 
 
@@ -40,11 +39,11 @@ You should see the following four packages installed:
 * jenkins-plugin-openshift-0.6.25-1.el6op.x86_64
 * openshift-origin-cartridge-jenkins-client-1.17.1-2.el6op.noarch
 
-If you do now have the above RPM packages installed on your node host, follow the directions in a previous to install the Jenkins packages.  Make sure to clear the cache on the broker host after installing the new packages.
+If you do now have the above RPM packages installed on your node host, follow the directions in a previous lab to install the Jenkins packages.  Make sure to clear the cache on the broker host after installing the new packages.
 
 ##**Create a Jenkins gear**
 
-In order to use Jenkins on OpenShift Enterprise, you will need to create an application gear that contains the Jenkins application.  This is done using the *rhc app create* command line tool, or you can use the web console to create the application.  The syntax for using the command line tool is as follows:
+In order to use Jenkins on OpenShift Enterprise, you will need to create an application gear that contains the Jenkins application.  This is done using the *rhc app create* command line tool, or you can use the management console to create the application.  The syntax for using the command line tool is as follows:
 
 	$ rhc app create jenkins jenkins
 	
@@ -86,11 +85,11 @@ You should see the following output from this command:
 
 	Run 'rhc show-app jenkins' for more details about your app.
 
-Make a note of the user username and password that was created for you by OpenShift Enterprise.
+Make a note of the username and password that were created for you by OpenShift Enterprise.
 
 ##**Adding Jenkins support to your application**
 
-Now that we have a Jenkins server setup and running, we can add support to our *todo* application which will allow all futures builds to compile on the Jenkins server.  To embed the Jenkins support cartridge in your application, use the following command:
+Now that we have a Jenkins server setup and running, we can add support to our *todo* application which will allow all future builds to compile on the Jenkins server.  To embed the Jenkins support cartridge in your application, use the following command:
 
 	$ rhc cartridge-add jenkins-client -a todo
 
@@ -145,7 +144,7 @@ Open up a web browser and point to the following URL:
 
 	https://jenkins-ose.apps.example.com/job/todo-build/
 	
-Authenticate to the Jenkins environment by providing the username and password that was displayed after adding the Jenkins application.
+Authenticate to the Jenkins environment by providing the username and password that were displayed after adding the Jenkins application.
 
 ![](http://training.runcloudrun.com/images/jenkins.png)
 
@@ -159,7 +158,7 @@ A few interesting configuration items exist that may come in handy in the future
 
 ![](http://training.runcloudrun.com/images/jenkins3.png)
 
-**Git Configuration**: The next configuration item of interest is the git SCM URL.  It specifies the URL of the git repository to use, the branch to use, etc. This section is important if you want to use Jenkins to build a project which exists outside of OpenShift Enterprise.  This would be useful for developers who have an internal repo for their source code that they would prefer to build from.
+**Git Configuration**: The next configuration item of interest is the git SCM URL.  It specifies the URL of the Git repository to use, the branch to use, etc. This section is important if you want to use Jenkins to build a project which exists outside of OpenShift Enterprise.  This would be useful for developers who have an internal repo for their source code that they would prefer to build from.
 
 **Build Configuration**: The last configuration item which is interesting is under the *build section*. Here you can specify a shell script for building the project. For our current builder it does the following:
 
@@ -214,7 +213,7 @@ Change the above code to the following:
 	
 Commit and push your change:
 
-	$ git commit -am “changed h2”
+	$ git commit -am "changed h2"
 	$ git push
 	
 After you push your changes to the Jenkins server, you should see the following output:
@@ -281,4 +280,5 @@ After you click the *Build Now* link, a new build will show up under the links o
 For more information about the current build, you can click on the build to manage and view details, including the console output, for the build.
 
 
-**Lab 18 Complete!**
+**Lab 19 Complete!**
+<!--BREAK-->

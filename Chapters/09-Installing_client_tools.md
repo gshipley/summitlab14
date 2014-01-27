@@ -23,9 +23,9 @@ OpenShift Enterprise client tools can be installed on any operating system with 
 
 [RubyInstaller 1.9](http://rubyinstaller.org/) provides the best experience for installing Ruby on Windows XP, Vista, and Windows 7. Download the latest 1.9 version from the [download page](http://rubyinstaller.org/downloads/) and launch the installer.
 
-**Important**: During the installation you should accept all of the defaults, it is mandatory that you select the "Add Ruby executables to your PATH" check box in order to run Ruby from the command line.
+**Important**: During the installation, you should accept all of the defaults.  It is mandatory that you select the "Add Ruby executables to your PATH" check box in order to run Ruby from the command line.
 
-After the installation is complete, to verify that the installation is working run:
+After the installation is complete, to verify that the installation is working, run:
 	
 	C:\Program Files\> ruby -e 'puts "Welcome to Ruby"'
 	Welcome to Ruby
@@ -34,7 +34,7 @@ If the 'Welcome to Ruby' message does not display, the Ruby executable may not h
 
 ###**Installing Git for Windows**
 
-The next step is to install [Git for Windows](http://msysgit.github.com/) so that you can synchronize your local application source and your OpenShift application. Git for Windows offers the easiest Git experience on the Windows operating system and is the recommended default - if you use another version of Git please ensure it can be executed from the command line and continue to the next section.
+The next step is to install [Git for Windows](http://msysgit.github.com/) so that you can synchronize your local application source and your OpenShift application. Git for Windows offers the easiest Git experience on the Windows operating system and is the recommended default - if you use another version of Git, please ensure it can be executed from the command line, and continue to the next section.
 
 Download and install the [latest version of Git for Windows](http://code.google.com/p/msysgit/downloads/list?q=full+installer+official+git). Ensure that Git is added to your PATH so that it can be run from the command line. After the installation has completed, verify that Git is correctly configured by runing:
 
@@ -93,13 +93,13 @@ After the OpenShift Enterprise client tools have been installed, run:
 
 ##**Red Hat Enterprise Linux 6 with OpenShift entitlement**
 
-The most recent version of the OpenShift Enterprise client tools are available as a RPM from the OpenShift Enterprise hosted YUM repository. We recommend this version to remain up to date, although a version of the OpenShift Enterprise client tools RPM is also available through EPEL.
+The most recent version of the OpenShift Enterprise client tools are available as a RPM from the OpenShift Enterprise hosted Yum repository. We recommend this version to remain up to date, although a version of the OpenShift Enterprise client tools RPM is also available through EPEL.
 
 With the correct entitlements in place, you can now install the OpenShift Enterprise 2.0 client tools by running the following command:
 
 	$ sudo yum install rubygem-rhc
 	
-If you do not have an OpenShift Enterprise on the system you want to install the client tools on, you can install ruby and ruby-gems and then issue the following command:
+If you do not have an OpenShift Enterprise on the system you want to install the client tools on, you can install ruby and rubygems and then issue the following command:
 
 	$ sudo gem install rhc
 

@@ -1,7 +1,3 @@
-Title:  OpenShift Enterprise Training 2.0 - Lab Manual
-Author: Grant Shipley  
-Date:   Jan, 2013
-
 #**Contents**#
 
 1. **Overview of OpenShift Enterprise 2.0**
@@ -16,13 +12,14 @@ Date:   Jan, 2013
 10. **Using *rhc setup***
 11. **Creating a PHP application**
 12. **Managing an application**
-13. **Using Cartridges**
-14. **Using the web console to create applications**
-15. **Scaling an application**
-16. **The DIY application type**
-17. **Developing Java EE applications using JBoss EAP**
-18. **Using Jenkins continuous integration**
-19. **Using JBoss Tools**
-20. **Using quickstarts**
-21. **Creating a quick start**
+13. **Using cartridges**
+14. **Using the management console to create applications**
+15. **Using the admin console**
+16. **Scaling an application**
+17. **The DIY application type**
+18. **Developing Java EE applications using JBoss EAP**
+19. **Using Jenkins continuous integration**
+20. **Using JBoss Tools**
+21. **Using quickstarts**
+22. **Creating a quick start**
 <!--BREAK-->

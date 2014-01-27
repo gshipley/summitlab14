@@ -1,5 +1,4 @@
-
-#**Lab 17:  Developing Java EE applications using JBoss EAP (Estimated time: 30 minutes)**
+#**Lab 18:  Developing Java EE applications using JBoss EAP (Estimated time: 30 minutes)**
 
 **Server used:**
 
@@ -13,7 +12,7 @@
 
 OpenShift Enterprise provides the JBoss EAP runtime to facilitate the development and deployment of Java EE 6 applications.
 
-JBoss Enterprise Application Platform 6 (JBoss EAP 6) is a fully compliant Java EE 6 platform which includes a subscription model with long-term support, platform certification, service packs and SLA(s).  In this lab we will build a simple todo application using Java EE 6 deployed on the JBoss EAP platform. The application will have a single entity called Todo and will persist todos to PostgreSQL using JPA. The application will also use EJB 3.1 Stateless session beans, Context and Dependency Injection (or CDI), and JAX RS for exposing RESTful web services.
+JBoss Enterprise Application Platform 6 (JBoss EAP 6) is a fully compliant Java EE 6 platform which includes a subscription model with long-term support, platform certification, service packs, and SLA(s).  In this lab we will build a simple todo application using Java EE 6 deployed on the JBoss EAP platform. The application will have a single entity called Todo and will persist todos to PostgreSQL using JPA. The application will also use EJB 3.1 Stateless session beans, Context and Dependency Injection (or CDI), and JAX RS for exposing RESTful web services.
 
 ##**Create a JBoss EAP application**
 
@@ -65,12 +64,12 @@ Verify that the application has been deployed and the template is displaying cor
 
 ##**Additional marker files for JBoss EAP**
 
-If you recall from a previous lab, we discussed the way that OpenShift Enterprise allows the developer to control and manage some of the runtime features using marker files.  For Java based deployments, there are additional marker files that a developer needs to be aware of:
+If you recall from a previous lab, we discussed the way that OpenShift Enterprise allows the developer to control and manage some of the runtime features using marker files.  For Java-based deployments, there are additional marker files that a developer needs to be aware of:
 
- * enable_jpda - Will enable the JPDA socket based transport on the JVM running the JBoss EAP application server. This enables you to remotely debug code running inside of the JBoss application server.
+ * enable_jpda - Will enable the JPDA socket-based transport on the JVM running the JBoss EAP application server. This enables you to remotely debug code running inside of the JBoss application server.
 
-   * skip\_maven_build - Maven build step will be skipped
-   * force\_clean_build - Will start the build process by removing all non essential Maven dependencies.  Any current dependencies specified in your pom.xml file will then be re-downloaded.
+   * skip\_maven_build - Maven build step will be skipped.
+   * force\_clean_build - Will start the build process by removing all nonessential Maven dependencies.  Any current dependencies specified in your pom.xml file will then be re-downloaded.
    * hot_deploy - Will prevent a JBoss container restart during build/deployment.  Newly built archives will be re-deployed automatically by the JBoss HDScanner component.
    * java7 - Will run JBoss EAP with Java7 if present. If no marker is present then the baseline Java version will be used (currently Java6)
 
@@ -80,7 +79,7 @@ If you list the contents of the application repository that was cloned to your l
 
 ##**Maven**
 
-OpenShift Enterprise uses the Maven build system for all Java projects.  Once you add new source code following the standard Maven directory structure, OpenShift Enterprise will recognize the existing *pom.xml* in your applications root directory in order to build the code remotely.  
+OpenShift Enterprise uses the Maven build system for all Java projects.  Once you add new source code following the standard Maven directory structure, OpenShift Enterprise will recognize the existing *pom.xml* in your application's root directory in order to build the code remotely.  
 
 The most important thing specified in the *pom.xml* file is a Maven profile named *openshift*. This is the profile which is invoked when you do deploy the code to OpenShift Enterprise.
 
@@ -94,11 +93,11 @@ At this point, we should have an application named *todo* created as well as hav
 
 ###**Creating Domain Model**
 
-**Note:** The source code for this application is available on github at the following URL:
+**Note:** The source code for this application is available on Github at the following URL:
 
 	https://github.com/gshipley/todo-javaee6
 	
-If you want the easy way out, use the information you have learned from a previous lab to add the above repository as a remote repository and then pull in the source code while overwriting the existing template. (Hint: The previous lab)
+If you want the easy way out, use the information you have learned from a previous lab to add the above repository as a remote repository and then pull in the source code while overwriting the existing template.  Then skip ahead to the section on deploying the application.
 
 The first thing that we have to do is to create the domain model for the *todo application*. The application will have a single entity named *Todo* as shown below. The entity shown below is a simple JPA entity with JPA and bean validation annotations.  Create a source file named *Todo.java* in the *todo/src/main/java/com/todo/domain* directory with the following contents:
 
@@ -244,7 +243,7 @@ Next we will create a stateless EJB bean named *TodoService* in the *com.todo.se
 	
 ###**Enable CDI**
 
-CDI or Context and Dependency Injection is a Java EE 6 specification which enables dependency injection in a Java EE 6 project. To enable CDI in the *todo* project, create a *beans.xml* file in *src/main/webapp/WEB-INF* directory with the following contents:
+CDI, or Context and Dependency Injection, is a Java EE 6 specification which enables dependency injection in a Java EE 6 project. To enable CDI in the *todo* project, create a *beans.xml* file in *src/main/webapp/WEB-INF* directory with the following contents:
 
 	<?xml version="1.0"?>
 	<beans xmlns="http://java.sun.com/xml/ns/javaee"
@@ -334,7 +333,7 @@ Now that we have our application created, we need to push our changes to the Ope
 	$ git commit -am “Adding source code”
 	$ git push
 	
-Once you execute the *git push* command, the application will begin building on the OpenShift Enterprise node host.  During this training class, the OpenStack virtual machines we have created are not production grade environments.  Because of this, the build process will take some time to complete.  Sit back, be patient, and help your fellow classmates who may be having problems.
+Once you execute the *git push* command, the application will begin building on the OpenShift Enterprise node host.  During this training class, the OpenStack virtual machines we have created are not production-grade environments.  Because of this, the build process will take some time to complete.  Sit back, be patient, and help your fellow classmates who may be having problems.
 
 ##**Testing the *todo* application**
 
@@ -357,7 +356,7 @@ You should see the following output:
 	
 	{"id":1,"todo":"Sell a lot of OpenShift Enterprise","tags":["javascript","ui"],"createdOn":1359086546955}
 	
-If you downloaded and deployed the source code from the git repository, the project contains a JSF UI component which will allow you to test the application using your web browser.  Simply point your browser to
+If you downloaded and deployed the source code from the Git repository, the project contains a JSF UI component which will allow you to test the application using your web browser.  Simply point your browser to
 
 	http://todo-ose.apps.example.com
 	
@@ -371,5 +370,5 @@ to verify that the application was deployed correctly.
 SSH into the application gear and verify the todo item was added to the PostgreSQL database.
 
 
-**Lab 17 Complete!**
+**Lab 18 Complete!**
 <!--BREAK-->

@@ -13,7 +13,7 @@
 * git
 * PHP
 
-Cartridges provide the actual functionality necessary to run applications. Currently, there are several cartridges available to support different programming languages, databases, monitoring and management. Cartridges are designed to be extensible so the community can add support for any programming language, database or any management tool not officially supported by OpenShift Enterprise. Please refer to the official OpenShift Enterprise documentation for how you can [write your own cartridge](https://openshift.redhat.com/community/wiki/introduction-to-cartridge-building).
+Cartridges provide the actual functionality necessary to run applications. There are several cartridges available to support different programming languages, databases, monitoring, and management. Cartridges are designed to be extensible so the community can add support for any programming language, database, or any management tool not officially supported by OpenShift Enterprise. Please refer to the official OpenShift Enterprise documentation for how you can [write your own cartridge](https://openshift.redhat.com/community/wiki/introduction-to-cartridge-building).
 
 	https://www.openshift.com/wiki/introduction-to-cartridge-building
 
@@ -31,8 +31,26 @@ To see a list of all available cartridges to users of this OpenShift Enterprise 
 	
 You should see the following output depending on which cartridges you have installed:
 
-	RESULT:
-	cron-1.4, mysql-5.1, haproxy-1.4, postgresql-8.4
+  jbosseap-6       JBoss Enterprise Application Platform 6.1.0 web
+  jenkins-1        Jenkins Server                              web
+  nodejs-0.10      Node.js 0.10                                web
+  perl-5.10        Perl 5.10                                   web
+  php-5.3          PHP 5.3                                     web
+  python-2.6       Python 2.6                                  web
+  python-2.7       Python 2.7                                  web
+  ruby-1.8         Ruby 1.8                                    web
+  ruby-1.9         Ruby 1.9                                    web
+  jbossews-1.0     Tomcat 6 (JBoss EWS 1.0)                    web
+  jbossews-2.0     Tomcat 7 (JBoss EWS 2.0)                    web
+  diy-0.1          Do-It-Yourself 0.1                          web
+  cron-1.4         Cron 1.4                                    addon
+  jenkins-client-1 Jenkins Client                              addon
+  mysql-5.1        MySQL 5.1                                   addon
+  postgresql-8.4   PostgreSQL 8.4                              addon
+  postgresql-9.2   PostgreSQL 9.2                              addon
+  haproxy-1.4      Web Load Balancer                           addon
+
+  Note: Web cartridges can only be added to new applications.
 	
 
 ##**Add the MySQL cartridge**
@@ -43,7 +61,7 @@ In order to use a cartridge, we need to embed it into our existing application. 
 	
 	You should see the following output:
 
-	dding mysql-5.1 to application 'firstphp' ... done
+	Adding mysql-5.1 to application 'firstphp' ... done
 
 	mysql-5.1 (MySQL 5.1)
 	---------------------
@@ -69,7 +87,7 @@ Developers will typically interact with MySQL by using the mysql shell command o
 	
 You will notice that you did not have to authenticate to the MySQL database.  This is because OpenShift Enterprise sets environment variables that contains the connection information for the database. 
 
-When embedding the MySQL database, OpenShift Enterprise creates a default database based upon the application name.  That being said, the user has full permissions to create new databases inside of MySQL.  Let’s use the default database that was created for us and create a *users* table:
+When embedding the MySQL database, OpenShift Enterprise creates a default database based upon the application name.  That being said, the user has full permissions to create new databases inside of MySQL.  Let's use the default database that was created for us and create a *users* table:
 
 	mysql> use firstphp;
 	Database changed
@@ -126,7 +144,7 @@ Given the above information, you can see that the log file directory for MySQL i
 	
 ##**Connecting to the MySQL cartridge from PHP**
 
-Now that we have verified that our MySQL database has been created correctly, and have created a database table with some user information, let’s connect to the database from PHP in order to verify that our application code can communicate to the newly embedded MySQL cartridge.  Create a new file in the *php* directory of your *firstphp* application named *dbtest.php*.  Add the following source code to the *dbtest.php* file:
+Now that we have verified that our MySQL database has been created correctly, and have created a database table with some user information, let's connect to the database from PHP in order to verify that our application code can communicate to the newly embedded MySQL cartridge.  Create a new file in the *php* directory of your *firstphp* application named *dbtest.php*.  Add the following source code to the *dbtest.php* file:
 
 
 	<?php
@@ -191,7 +209,7 @@ You should see the following message returned to your browser:
 
 	Could not connect to database
 	
-Start the database back up using the *start* switch.
+Start the database back up using the *cartridge-start* command.
 	
 	$ rhc cartridge-start mysql -a firstphp
 	
@@ -205,7 +223,7 @@ You should see a screen with the following information:
 	Connected to database.
 	1 gshipley@redhat.com 
 	
-OpenShift Enterprise also provides the ability to list important information about a cartridge by using the *show* switch.  For example, if a user has forgotten their MySQL connection information, they can display this information with the following command:
+OpenShift Enterprise also provides the ability to list important information about a cartridge by using the *cartridge-show* command.  For example, if a user has forgotten their MySQL connection information, they can display this information with the following command:
 
 	$ rhc cartridge-show mysql -a firstphp
 	
@@ -225,7 +243,7 @@ The user will then be presented with the following output:
 
 At this point, you may have noticed that the database cartridge is only accessible via a 127.x.x.x private address.  This ensures that only the application gear can communicate with the database.
 
-With OpenShift Enterprise port forwarding, developers can connect to remote services with local client tools.  This allows the developer to focus on code without having to worry about the details of configuring complicated firewall rules or SSH tunnels. To connect to the MySQL database running on our OpenShift Enterprise gear, you have to first forward all the ports to your local machine. This can be done using the *rhc port-forward* command.  This command is a wrapper that configures SSH port forwarding. Once the command is executed, you should see a list of services that are being forwarded and the associated IP address and port to use for connections as shown below:
+With OpenShift Enterprise port-forwarding, developers can connect to remote services with local client tools.  This allows the developer to focus on code without having to worry about the details of configuring complicated firewall rules or SSH tunnels. To connect to the MySQL database running on our OpenShift Enterprise gear, you have to first forward all the ports to your local machine. This can be done using the *rhc port-forward* command.  This command is a wrapper that configures SSH port forwarding. Once the command is executed, you should see a list of services that are being forwarded and the associated IP address and port to use for connections as shown below:
 
 	$ rhc port-forward firstphp
  
@@ -238,7 +256,7 @@ With OpenShift Enterprise port forwarding, developers can connect to remote serv
 
 	Press CTRL-C to terminate port forwarding
 
-In the above snippet, you can see that mysql database, which we added to the *firstphp* gear, is forwarded to our local machine. If you open http://127.0.0.1:8080 in your browser you will see the application.
+In the above snippet, you can see that mysql database, which we added to the *firstphp* gear, is forwarded to our local machine. If you open http://127.0.0.1:8080 in your browser, you will see the application.
 
 **Note:** At the time of this writing, there is an extra step to enable port forwarding on Mac OS X based systems.  You will need to create an alias on your loopback device for the IP address listed in output shown above.  
 
@@ -252,7 +270,7 @@ Now that you have your services forward, you can connect to them using local cli
 
 ##**Enable *hot_deploy***
 
-If you are familiar with PHP, you will probably be wondering why we stop and start apache on each code deployment.  Fortunately, we provide a way for developers to signal to OpenShift Enterprise that they do not want us to restart the application runtime for each deployment.  This is accomplished by creating a hot_deploy marker in the correct directory.  Change to your application root directory, for example ~/code/ose/firstphp and issue the following commands:
+If you are familiar with PHP, you will probably be wondering why we stop and start Apache on each code deployment.  Fortunately, we provide a way for developers to signal to OpenShift Enterprise that they do not want to restart the application runtime for each deployment.  This is accomplished by creating a hot_deploy marker in the correct directory.  Change to your application root directory, for example ~/code/ose/firstphp, and issue the following commands:
 
 	$ touch .openshift/markers/hot_deploy
 	$ git add .
@@ -293,3 +311,4 @@ Adding a hot_deploy marker will significantly increase the speed of application 
 
 **Lab 13 Complete!**
 <!--BREAK-->
+

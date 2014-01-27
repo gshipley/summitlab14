@@ -18,7 +18,7 @@ This lab will focus on installing cartridges to allow OpenShift Enterprise to cr
 
 ##**Listing available cartridges for your subscription**
 
-For a complete list of all cartridges that you are entitled to install,  you can perform a search using the yum command that will output all OpenShift Enterprise cartridges.
+For a complete list of all cartridges that you are entitled to install,  you can perform a search using the *yum* command that will output all OpenShift Enterprise cartridges.
 
 **Note:  Run the following command on the node host.**
 
@@ -47,7 +47,7 @@ In order to enable consumers of the PaaS to create JBoss gears, we will need to 
 
 **Note:  Execute the following on the node host.**
 
-	# yum install openshift-origin-cartridge-jbosseap-6.0.noarch openshift-origin-cartridge-jbossews-1.0.noarch openshift-origin-cartridge-jenkins-1.4.noarch openshift-origin-cartridge-jenkins-client-1.4.noarch
+	# yum install openshift-origin-cartridge-jbosseap openshift-origin-cartridge-jbossews openshift-origin-cartridge-postgresql
 	
 The above command will allow users to create JBoss EAP and JBoss EWS gears.  We also installed support for the Jenkins continuous integration environment which we will cover in a later lab.  At the time of this writing, the above command will download and install an additional 285 packages on your node host.
 
@@ -55,21 +55,21 @@ The above command will allow users to create JBoss EAP and JBoss EWS gears.  We 
 
 ##**Clearing the broker application cache**
 
-At this point, you will notice that if you try to create a JBoss based application via the web console, that the application type is not available.  This is because the broker host creates a cache of available gear types to increase performance.  After adding a new cartridge, you need to clear this cache in order for the new gear type to be available to users.
+At this point, you will notice that if you try to create a JBoss based application via the management console, the application type is not available.  This is because the broker host creates a cache of available cartridges to increase performance.  After adding a new cartridge, you need to clear this cache in order for the new cartridge to be available to users.
 
 Caching is performed in multiple components:
 
 * Each node maintains a database of facts about itself, including a list of installed cartridges.
 * Using MCollective, a broker queries a node's facts database for the list of cartridges and caches the node's response.
-* Using the broker's REST API, the developer console queries the broker for the list of cartridges and caches the broker's response.
+* Using the broker's REST API, the management console queries the broker for the list of cartridges and caches the broker's response.
 
 The cartridge lists are updated automatically at the following intervals:
 
 * The node's database is refreshed every minute.
 * The broker's cache is refreshed every six hours.
-* The Console's cache is refreshed every five minutes.
+* The console's cache is refreshed every five minutes.
 
-In order to clear the cache for both the broker and web console at the same time, enter in the following command:
+In order to clear the cache for both the broker and management console at the same time, enter in the following command:
 
 **Note:** Execute the following on the broker host.
 
@@ -80,32 +80,26 @@ You should see the following confirmation message:
 	Clearing broker cache.
 	Clearing console cache.
 	
-It may take several minutes before you see the new cartridges available on the web console as it takes a few minutes for the cache to completely clear.
+It may take several minutes before you see the new cartridges available on the management console as it takes a few minutes for the cache to completely clear.
 
 ##**Testing new cartridges**
 
-Given the steps in lab 16 of this training, you should be able to access the web console from a web browser using your local machine.  Open up your preferred browser and enter the following URL:
+Given the steps in Lab 16 of this training, you should be able to access the management console from a web browser using your local machine.  Open up your preferred browser and enter the following URL:
 
-	http://broker.hosts.example.com
+	http://broker.example.com
 	
-You will be prompted to authenticate and then be presented with an application creation screen.
-
-**Note:** Use the default username and password for the demo user that has been provided to you by the instructor.  In a normal oo-install procedure, this default is set to **demo/changeme**.
-
-After the cache has been cleared, and assuming you have added the new cartridges correctly, you should see a screen similar to the following:
+You will be prompted to authenticate and then be presented with an application creation screen.  After the cache has been cleared, and assuming you have added the new cartridges correctly, you should see a screen similar to the following:
 
 ![](http://training-onpaas.rhcloud.com/ose2/addCartridgeWebConsole.png)
 
-**Note:** You may see the *Welcome to OpenShift* page if this is the first time you are viewing the web console.  If this is the case, you will need to click on *Create your first application now* in order to view the new cartridges.
-
-If you do not see the new cartridges available on the web console, check that the new cartridges are available by viewing the contents of the */usr/libexec/openshift/cartridges* directory:
+If you do not see the new cartridges available on the management console, check that the new cartridges are available by viewing the contents of the */usr/libexec/openshift/cartridges* directory:
 
 	# cd /usr/libexec/openshift/cartridges
 	# ls
 	
 ##**Installing the PostgreSQL and DIY cartridges**
 
-Using the knowledge that you have gained during in this lab, perform the necessary commands to install both the PostgreSQL and DIY cartridges on your node host.  Verify the success of the installation by ensuring that the DIY application type is available on the web console:
+Using the knowledge that you have gained during in this lab, perform the necessary commands to install both the PostgreSQL and DIY cartridges on your node host.  Verify the success of the installation by ensuring that the DIY application type is available on the management console:
 
 ![](http://training.runcloudrun.com/images/console-diy.png)
 

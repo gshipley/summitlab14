@@ -9,7 +9,7 @@
 * text editor
 * networking tools
 
-At this point, we should have a complete OpenShift Enterprise installation working correctly on the lab machines that were provided to you by the instructor.  During the next portion of the training, we will be focussing on administration and usage of the OpenShift Enterprise PaaS.  To make performing these tasks easier, it is suggested that you add the DNS server that we created in a previous to be the first nameserver that your local machine uses to resolve hostnames.  The process for this varies depending on the operating system.  This lab manual will cover the configuration for both the Linux and Mac operating systems.  If you are using a Microsoft Windows operating system, consult the instructor for instructions on how to perform this lab.
+At this point, we should have a complete OpenShift Enterprise installation working correctly on the lab machines that were provided to you by the instructor.  During the next portion of the training, we will be focussing on administration and usage of the OpenShift Enterprise PaaS.  To make performing these tasks easier, it is suggested that you add the DNS server that we created in a previous lab to be the first nameserver that your local machine uses to resolve hostnames.  The process for this varies depending on the operating system.  This lab manual will cover the configuration for both the Linux and Mac operating systems.  If you are using a Microsoft Windows operating system, consult the instructor for instructions on how to perform this lab.
 
 ##**Configuring example.com resolution for Linux**
 
@@ -24,13 +24,13 @@ Once you have added the above nameserver, you should be able to communicate with
 	
 ##**Configuring example.com resolution for OS X version 10.6 and below**
 	
-If you are using OSX, you will notice that the operating has a */etc/resolv.conf* configuration file.  However, the operating system does not respect this file and requires users to edit the DNS servers via the *System Preferences* tool.
+If you are using OS X, you will notice that the operating has a */etc/resolv.conf* configuration file.  However, the operating system does not respect this file and requires users to edit the DNS servers via the *System Preferences* tool.
 
 Open up the *System Preferences* tool and select the *Network* utility:
 
 ![](http://training.runcloudrun.com/images/network.png)
 
-On the bottom left hand corner of the *Network* utility, ensure that the lock button is unlocked to enable user modifications to the DNS configuration.  Once you have unlocked the system for changes, locate the ethernet device that is providing connectivity for your machine and click the advanced button:
+On the bottom left hand corner of the *Network* utility, ensure that the lock button is unlocked to enable user modifications to the DNS configuration.  Once you have unlocked the system for changes, locate the Ethernet device that is providing connectivity for your machine and click the advanced button:
 
 ![](http://training.runcloudrun.com/images/network2.png)
 
@@ -40,7 +40,7 @@ Select the DNS tab at the top of the window:
 
 **Note:** Make a list of the current DNS servers that you have configured for your operating system.  When you add a new one, OSX removes the existing servers forcing you to add them back.
 
-Click the *+* button to add a new DNS server and enter the 10.4.59.x IP address of your broker host.
+Click the *+* button to add a new DNS server and enter the 209.x.x.x IP address of your broker host.
 
 ![](http://training.runcloudrun.com/images/network4.png)
 
@@ -55,7 +55,7 @@ After you have applied the changes, we can now test that name resolution is work
 	
 ##**Configuring example.com resolution for OS X version 10.7 and above**
 
-With newer versions of OS X, the operating system will remove a DNS server from the resolution system if the server fails to return a proper address and the next server resolves it.  During the OpenShift Enterprise 2.0 installation, the *oo-install* tool does not enable forwarding on the bind instance which will result in domain names other than **.exmaple.com* not resolving.  Fortunately we can solve this using the */etc/resolver/* system in place for OS X.
+With newer versions of OS X, the operating system will remove a DNS server from the resolution system if the server fails to return a proper address and the next server resolves it.  During the OpenShift Enterprise 2.0 installation, the *openshift.sh* installation script does not enable forwarding on the BIND instance, which will result in domain names other than **.example.com* not resolving.  Fortunately we can solve this using the */etc/resolver/* system in place for OS X.
 
 In order to enable this functionality, we need to create the */etc/resolver* directory if it doesn't exist.  Open up a terminal on your OS X machine and enter in the following commands:
 
@@ -67,7 +67,7 @@ Once the file has been created, edit the contents to include the following:
 	domain example.com
 	nameserver 209.x.x.x
 	
-Ensure to replace the *209.x.x.x* IP address with the correct one of your broker host.
+Be sure to replace the *209.x.x.x* IP address with the correct one of your broker host.
 
 After you have applied the changes, we can now test that name resolution is working correctly.  To test this out, ping the broker and node hosts from your local machine:
 
