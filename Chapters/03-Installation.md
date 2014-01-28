@@ -134,11 +134,6 @@ Now launch the installation script:
 
 The installation script will take a while depending on the speed of the connection at your location and the number of RPM packages that need to be installed.  During this time, the instructor will lecture about the architecture of OpenShift Enterprise.
 
-Once the installation has completed, reboot the broker host and then the node host with the following command:
-
-    # shutdown -r now
-
-
 **Lab 3 Complete!**
 
 <!--BREAK-->
