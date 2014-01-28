@@ -1,4 +1,4 @@
-#**Lab 12: Managing an application (Estimated time: 30 minutes)**
+#**Lab 12: Managing an application**
 
 **Server used:**
 

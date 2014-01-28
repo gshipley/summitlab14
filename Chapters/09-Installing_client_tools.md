@@ -1,4 +1,4 @@
-#**Lab 9: Installing the RHC client tools (Estimated time: 15 minutes)**
+#**Lab 9: Installing the RHC client tools**
 
 **Server used:**
 

@@ -1,4 +1,4 @@
-#**Lab 8: Managing districts (Estimated time: 10 minutes)**
+#**Lab 8: Managing districts**
 
 **Server used:**
 

@@ -1,4 +1,4 @@
-#**Lab 13: Using cartridges (Estimated time: 30 minutes)**
+#**Lab 13: Using cartridges**
 
 **Server used:**
 

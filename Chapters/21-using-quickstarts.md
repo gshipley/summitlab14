@@ -1,4 +1,4 @@
-#**Lab 21: Using quickstarts (Estimated time: 10 minutes)**
+#**Lab 21: Using quickstarts**
 
 
 **Server used:**

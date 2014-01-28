@@ -1,4 +1,4 @@
-#**Lab 3: Installing OpenShift Enterprise 2.0 (Estimated time: XXX minutes)**
+#**Lab 3: Installing OpenShift Enterprise 2.0**
 
 **Server used:**
 

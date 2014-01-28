@@ -1,4 +1,4 @@
-#**Lab 15: Using the admin console (Estimated time: 15 minutes)**
+#**Lab 15: Using the admin console**
 
 
 **Server used:**

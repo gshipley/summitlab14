@@ -1,4 +1,4 @@
-#**Lab 19:  Using Jenkins continuous integration (Estimated time: 30 minutes)**
+#**Lab 19:  Using Jenkins continuous integration**
 
 **Server used:**
 

@@ -1,4 +1,4 @@
-#**Lab 18:  Developing Java EE applications using JBoss EAP (Estimated time: 30 minutes)**
+#**Lab 18:  Developing Java EE applications using JBoss EAP**
 
 **Server used:**
 

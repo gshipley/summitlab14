@@ -1,4 +1,4 @@
-#**Lab 7: Managing resources (Estimated time: 10 minutes)**
+#**Lab 7: Managing resources**
 
 **Server used:**
 

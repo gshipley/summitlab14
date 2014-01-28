@@ -1,5 +1,5 @@
 
-#**Lab 4: Verifying the installation (Estimated time: 15 minutes)**
+#**Lab 4: Verifying the installation**
 
 **Server used:**
 

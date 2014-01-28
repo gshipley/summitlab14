@@ -1,4 +1,4 @@
-#**Lab 16: Scaling an application (Estimated time: 15 minutes)**
+#**Lab 16: Scaling an application**
 
 
 **Server used:**

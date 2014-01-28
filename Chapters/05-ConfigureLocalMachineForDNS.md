@@ -1,4 +1,4 @@
-#**Lab 5: Configuring local machine for DNS resolution (Estimated time: 10 minutes)**
+#**Lab 5: Configuring local machine for DNS resolution**
 
 **Server used:**
 

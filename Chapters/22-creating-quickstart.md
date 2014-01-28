@@ -1,4 +1,4 @@
-#**Lab 22: Creating a quick start (Estimated time: 30 minutes)**
+#**Lab 22: Creating a quick start**
 
 
 **Server used:**

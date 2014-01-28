@@ -1,4 +1,4 @@
-#**Lab 6: Adding cartridges (Estimated time: 10 minutes)**
+#**Lab 6: Adding cartridges**
 
 **Server used:**
 

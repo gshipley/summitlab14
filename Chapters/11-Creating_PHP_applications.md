@@ -1,4 +1,4 @@
-#**Lab 11: Creating a PHP application (Estimated time: 30 minutes)**
+#**Lab 11: Creating a PHP application**
 
 **Server used:**
 

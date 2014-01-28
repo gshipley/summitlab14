@@ -1,4 +1,4 @@
-#**Lab 20:  Using JBoss Tools (Estimated time: 30 minutes)**
+#**Lab 20:  Using JBoss Tools**
 
 **Server used:**
 

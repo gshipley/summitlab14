@@ -1,4 +1,4 @@
-#**Lab 10: Using *rhc setup* (Estimated time: 10 minutes)**
+#**Lab 10: Using *rhc setup***
 
 **Server used:**
 

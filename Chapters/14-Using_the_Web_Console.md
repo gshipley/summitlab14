@@ -1,4 +1,4 @@
-#**Lab 14: Using the management console to create applications (Estimated time: 15 minutes)**
+#**Lab 14: Using the management console to create applications**
 
 
 **Server used:**

@@ -1,4 +1,4 @@
-#**Lab 2: Using the OpenShift Enterprise Subscription (Estimated time: XXX minutes)**
+#**Lab 2: Using the OpenShift Enterprise Subscription**
 
 **Servers used:**
 

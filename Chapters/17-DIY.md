@@ -1,4 +1,4 @@
-#**Lab 17: The DIY application type (Estimated time: 10 minutes)**
+#**Lab 17: The DIY application type**
 
 **Server used:**
 

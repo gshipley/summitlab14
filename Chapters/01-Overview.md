@@ -40,9 +40,6 @@ This lab manual contains many configuration items that will need to be performed
 
     http://training.runcloudrun.com
     
-In order to download all of the sample configuration files for the lab, enter the following command on your host:
-
-    # wget -rnp --reject index.\* http://training.runcloudrun.com/labs/
     
 **Lab 1 Complete!**
 
