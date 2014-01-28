@@ -8,38 +8,40 @@
 **Tools used:**
 
 * SSH
-* subscription-manager
+* rhn-channel
 * yum
 * ssh-keygen
 * ssh-copy-id
 * sh
 
+##**Verifying Red Hat Network Channels**
 
-##**Registering the system and adding subscriptions**
+In order to be able to update to newer packages, and to download the OpenShift Enterprise software, your system will need to be registered with Red Hat to grant your system access to appropriate software channels.  The machines provided to you in this lab have already been registered with the production Red Hat Network, and the channels you will need have already been added.
 
-In order to be able to update to newer packages, and to download the OpenShift Enterprise software, your system will need to be registered with Red Hat to allow your system access to appropriate software channels.  You will need the following subscription at a minimum for this class.
+Please verify now that your machines have the required channels enabled:
 
-* OpenShift Enterprise Employee Subscription
+**Note:** Execute the following on both of the hosts that have been provided to you
 
-The machines provided to you in this lab have already been registered with the production Red Hat Network.  However, they have not been enabled for the above subscriptions.  List all of the available subscriptions for the account that has been registered for you:
-
-**Note:** Execute the following on the broker host
-
-	# subscription-manager list --available	
+	# rhn-channel --list
 	
-From the list provided, subscribe to the OpenShift Enterprise Employee subscription.  
+You should see the following list of channels:
 
-	# subscription-manager attach --pool {pool id from the above command}
+	jb-ews-2-x86_64-server-6-rpm
+	jbappplatform-6-x86_64-server-6-rpm
+	rhel-x86_64-server-6
+	rhel-x86_64-server-6-ose-2.0-infrastructure
+	rhel-x86_64-server-6-ose-2.0-jbosseap
+	rhel-x86_64-server-6-ose-2.0-node
+	rhel-x86_64-server-6-ose-2.0-rhc
+	rhel-x86_64-server-6-rhscl-1
 
-Once you have attached to correct pool, verify that you are subscribed to OpenShift Enterprise.
-
-	# subscription-manager list --consumed
-	
-Also, take note of the yum repositories that you are now able to install packages from.
+You can also see the list of available channels using Yum:
 
 	# yum repolist
 	
-Perform the subscription process on the node host as well.
+You should see the same channels listed.  If you do not see the expected output, ask the instructor for assistance.
+
+Note that if you were registered using Red Hat Subscription Manager, the channels would be named using a different format.
 	
 **Lab 2 Complete!**
 
