@@ -125,7 +125,7 @@ You should see the following directories:
 	drwxr-xr-x.  3 root root                             4096 Jan 21 13:47 git
 	-rw-r--r--.  1 root root                               56 Jan 21 13:47 .gitconfig
 	-rw-r--r--.  1 root root                             1352 Jan 21 13:47 .pearrc
-	drwxr-xr-x. 10 root root                             4096 Jan 21 13:47 php-5.3
+	drwxr-xr-x. 10 root root                             4096 Jan 21 13:47 php
 	d---------.  3 root root                             4096 Jan 21 13:47 .sandbox
 	drwxr-x---.  2 root e9e92282a16b49e7b78d69822ac53e1d 4096 Jan 21 13:47 .ssh
 	d---------.  3 root root                             4096 Jan 21 13:47 .tmp
@@ -308,7 +308,7 @@ Adding a new source code file to your OpenShift Enterprise application is an eas
 Once you have saved this file, the process for pushing the changes involves adding the new file to your git repository, committing the change, and then pushing the code to your OpenShift Enterprise gear:
 
 	$ git add .
-	$ git commit -am “Adding time.php”
+	$ git commit -am "Adding time.php"
 	$ git push
 	
 ##**Verify code change**

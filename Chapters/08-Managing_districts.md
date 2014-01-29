@@ -78,7 +78,7 @@ You should see the following collections returned:
 	
 We can now query the *district* collection to verify the creation of our small district:
 
-	> db.districst.find()
+	> db.districts.find()
 	
 The output should be:
 

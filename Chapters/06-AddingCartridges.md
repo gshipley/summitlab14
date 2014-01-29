@@ -85,9 +85,9 @@ It may take several minutes before you see the new cartridges available on the m
 
 ##**Testing new cartridges**
 
-Given the steps in Lab 16 of this training, you should be able to access the management console from a web browser using your local machine.  Open up your preferred browser and enter the following URL:
+Given the steps in Lab 5 of this training, you should be able to access the management console from a web browser using your local machine.  Open up your preferred browser and enter the following URL:
 
-	http://broker.example.com
+	http://broker.hosts.example.com
 	
 You will be prompted to authenticate and then be presented with an application creation screen.  After the cache has been cleared, and assuming you have added the new cartridges correctly, you should see a screen similar to the following:
 
