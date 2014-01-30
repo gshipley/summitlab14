@@ -274,7 +274,7 @@ Before exposing a RESTful web service for the *Todo* entity, we need to enable J
 	import javax.ws.rs.ApplicationPath;
 	import javax.ws.rs.core.Application;
 	
-	@ApplicationPath(“/rest”)
+	@ApplicationPath("/rest")
 	public class JaxRsActivator extends Application {
 	   /* class body intentionally left blank */
 	}
@@ -330,7 +330,7 @@ Next we will create a *TodoRestService* class which will expose two methods that
 Now that we have our application created, we need to push our changes to the OpenShift Enterprise gear that we created earlier in this lab.  From the application root directory, issue the following commands:
 
 	$ git add .
-	$ git commit -am “Adding source code”
+	$ git commit -am "Adding source code"
 	$ git push
 	
 Once you execute the *git push* command, the application will begin building on the OpenShift Enterprise node host.  During this training class, the OpenStack virtual machines we have created are not production-grade environments.  Because of this, the build process will take some time to complete.  Sit back, be patient, and help your fellow classmates who may be having problems.
