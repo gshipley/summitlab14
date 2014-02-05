@@ -22,7 +22,9 @@
 20. **Using JBoss Tools**
 21. **Using quickstarts**
 22. **Creating a quick start**
-<!--BREAK-->#**Lab 1: Overview of OpenShift Enterprise 2.0**
+<!--BREAK-->
+
+#**Lab 1: Overview of OpenShift Enterprise 2.0**
 
 ##**1.1 Assumptions**
 
@@ -67,7 +69,8 @@ This lab manual contains many configuration items that will need to be performed
     
 **Lab 1 Complete!**
 
-<!--BREAK-->#**Lab 2: Using the OpenShift Enterprise Subscription**
+<!--BREAK-->
+#**Lab 2: Using the OpenShift Enterprise Subscription**
 
 **Servers used:**
 
@@ -572,9 +575,9 @@ It may take several minutes before you see the new cartridges available on the m
 
 ##**Testing new cartridges**
 
-Given the steps in Lab 16 of this training, you should be able to access the management console from a web browser using your local machine.  Open up your preferred browser and enter the following URL:
+Given the steps in Lab 5 of this training, you should be able to access the management console from a web browser using your local machine.  Open up your preferred browser and enter the following URL:
 
-	http://broker.example.com
+	http://broker.hosts.example.com
 	
 You will be prompted to authenticate and then be presented with an application creation screen.  After the cache has been cleared, and assuming you have added the new cartridges correctly, you should see a screen similar to the following:
 
@@ -772,7 +775,7 @@ You should see the following collections returned:
 	
 We can now query the *district* collection to verify the creation of our small district:
 
-	> db.districst.find()
+	> db.districts.find()
 	
 The output should be:
 
@@ -1198,7 +1201,7 @@ You should see the following directories:
 	drwxr-xr-x.  3 root root                             4096 Jan 21 13:47 git
 	-rw-r--r--.  1 root root                               56 Jan 21 13:47 .gitconfig
 	-rw-r--r--.  1 root root                             1352 Jan 21 13:47 .pearrc
-	drwxr-xr-x. 10 root root                             4096 Jan 21 13:47 php-5.3
+	drwxr-xr-x. 10 root root                             4096 Jan 21 13:47 php
 	d---------.  3 root root                             4096 Jan 21 13:47 .sandbox
 	drwxr-x---.  2 root e9e92282a16b49e7b78d69822ac53e1d 4096 Jan 21 13:47 .ssh
 	d---------.  3 root root                             4096 Jan 21 13:47 .tmp
@@ -1381,7 +1384,7 @@ Adding a new source code file to your OpenShift Enterprise application is an eas
 Once you have saved this file, the process for pushing the changes involves adding the new file to your git repository, committing the change, and then pushing the code to your OpenShift Enterprise gear:
 
 	$ git add .
-	$ git commit -am “Adding time.php”
+	$ git commit -am "Adding time.php"
 	$ git push
 	
 ##**Verify code change**
@@ -2868,7 +2871,7 @@ Before exposing a RESTful web service for the *Todo* entity, we need to enable J
 	import javax.ws.rs.ApplicationPath;
 	import javax.ws.rs.core.Application;
 	
-	@ApplicationPath(“/rest”)
+	@ApplicationPath("/rest")
 	public class JaxRsActivator extends Application {
 	   /* class body intentionally left blank */
 	}
@@ -2924,7 +2927,7 @@ Next we will create a *TodoRestService* class which will expose two methods that
 Now that we have our application created, we need to push our changes to the OpenShift Enterprise gear that we created earlier in this lab.  From the application root directory, issue the following commands:
 
 	$ git add .
-	$ git commit -am “Adding source code”
+	$ git commit -am "Adding source code"
 	$ git push
 	
 Once you execute the *git push* command, the application will begin building on the OpenShift Enterprise node host.  During this training class, the OpenStack virtual machines we have created are not production-grade environments.  Because of this, the build process will take some time to complete.  Sit back, be patient, and help your fellow classmates who may be having problems.

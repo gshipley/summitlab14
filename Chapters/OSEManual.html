@@ -1353,9 +1353,9 @@ Clearing console cache.
 
 <h2 id="testingnewcartridges"><strong>Testing new cartridges</strong></h2>
 
-<p>Given the steps in Lab 16 of this training, you should be able to access the management console from a web browser using your local machine. Open up your preferred browser and enter the following URL: </p>
+<p>Given the steps in Lab 5 of this training, you should be able to access the management console from a web browser using your local machine. Open up your preferred browser and enter the following URL: </p>
 
-<pre><code>http://broker.example.com  
+<pre><code>http://broker.hosts.example.com  
 </code></pre>
 
 <p>You will be prompted to authenticate and then be presented with an application creation screen. After the cache has been cleared, and assuming you have added the new cartridges correctly, you should see a screen similar to the following: </p>
@@ -1583,7 +1583,7 @@ NODE_PROFILE_ENABLED=true
 
 <p>We can now query the <em>district</em> collection to verify the creation of our small district:</p>
 
-<pre><code>&gt; db.districst.find()  
+<pre><code>&gt; db.districts.find()  
 </code></pre>
 
 <p>The output should be:</p>
@@ -2066,7 +2066,7 @@ drwxr-x---.  3 root e9e92282a16b49e7b78d69822ac53e1d 4096 Jan 21 13:47 .env
 drwxr-xr-x.  3 root root                             4096 Jan 21 13:47 git  
 -rw-r--r--.  1 root root                               56 Jan 21 13:47 .gitconfig  
 -rw-r--r--.  1 root root                             1352 Jan 21 13:47 .pearrc  
-drwxr-xr-x. 10 root root                             4096 Jan 21 13:47 php-5.3  
+drwxr-xr-x. 10 root root                             4096 Jan 21 13:47 php  
 d---------.  3 root root                             4096 Jan 21 13:47 .sandbox  
 drwxr-x---.  2 root e9e92282a16b49e7b78d69822ac53e1d 4096 Jan 21 13:47 .ssh  
 d---------.  3 root root                             4096 Jan 21 13:47 .tmp  
@@ -2290,7 +2290,7 @@ echo date('l jS \of F Y h:i:s A');
 <p>Once you have saved this file, the process for pushing the changes involves adding the new file to your git repository, committing the change, and then pushing the code to your OpenShift Enterprise gear:</p>
 
 <pre><code>$ git add .
-$ git commit -am “Adding time.php”
+$ git commit -am &quot;Adding time.php&quot;
 $ git push  
 </code></pre>
 
@@ -3960,7 +3960,7 @@ public class Resources {
 import javax.ws.rs.ApplicationPath;  
 import javax.ws.rs.core.Application;  
 
-@ApplicationPath(“/rest”)  
+@ApplicationPath(&quot;/rest&quot;)  
 public class JaxRsActivator extends Application {
    /* class body intentionally left blank */
 }  
@@ -4017,7 +4017,7 @@ public class TodoRestService {
 <p>Now that we have our application created, we need to push our changes to the OpenShift Enterprise gear that we created earlier in this lab. From the application root directory, issue the following commands:</p>
 
 <pre><code>$ git add .
-$ git commit -am “Adding source code”
+$ git commit -am &quot;Adding source code&quot;
 $ git push  
 </code></pre>
 
