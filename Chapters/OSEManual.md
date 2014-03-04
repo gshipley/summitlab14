@@ -499,7 +499,6 @@ After you have applied the changes, we can now test that name resolution is work
 **Tools used:**
 
 * yum
-* bundle
 
 By default, OpenShift Enterprise caches certain values for faster retrieval. Clearing this cache allows the retrieval of updated settings.
 
