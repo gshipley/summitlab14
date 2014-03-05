@@ -54,6 +54,12 @@ The installation script supports several installation methods.  For this trainin
 
 ### Executing *openshift.sh* ###
 
+**Tip:** When executing *openshift.sh*, it is a good idea to log its output for reference in case you later need to diagnose the installation.  One simple way to log this output is to use the GNU Screen program, which is already installed on the hosts you have been provided.  If you are not already in a GNU Screen session, use the following command to start a new session with logging enabled:
+
+  # screen -L
+
+You can continue this lab and subsequent labs within this GNU Screen session.
+
 Let's go ahead and execute the command to run installation script.
 
 For own use, set the *host1* and *host2* environment variables:
@@ -74,7 +80,7 @@ Now let's execute *openshift.sh*.
 
 **Note:** Perform the following command on the broker host.
 
-	# sh openshift.sh install_components=broker,named,activemq,datastore domain=apps.example.com hosts_domain=hosts.example.com broker_hostname=broker.hosts.example.com named_ip_addr=$host1 named_entries=broker:$host1,activemq:$host1,datastore:$host1,node:$host2 install_method=rhn
+	# sh openshift.sh install_components=broker,named,activemq,datastore domain=apps.example.com hosts_domain=hosts.example.com broker_hostname=broker.hosts.example.com named_ip_addr=$host1 named_entries=broker:$host1,activemq:$host1,datastore:$host1,node:$host2 install_method=rhsm
 
 The installation script will take a while depending on the speed of the connection at your location.  While the installation script runs on the OpenShift broker host, open a new terminal window or tab and continue on to the next section to begin the installation and configuration of your second host which will be the node host.
 
@@ -112,6 +118,12 @@ Just as when we installed the OpenShift broker host, we must specify the *instal
 
 ### Executing *openshift.sh* ###
 
+**Tip:** It is recommended to log the output of *openshift.sh* using a utility such as GNU Screen.  If you are not already in a GNU Screen session, use the following command to start a new session with logging enabled:
+
+  # screen -L
+
+You can continue this lab and subsequent labs within this GNU Screen session.
+
 Before we execute the command to run installation script, let's set the *host1* and *host2* environment variables as we did on the broker host:
 
 **Note:** Perform the following command on the node host.
@@ -130,7 +142,7 @@ I would enter in the following command:
 
 Now launch the installation script:
 
-	# sh openshift.sh install_components=node cartridges=all,-jboss,-jenkins,-postgres,-diy domain=apps.example.com hosts_domain=hosts.example.com named_ip_addr=$host1 node_hostname=node.hosts.example.com node_ip_addr=$host2 install_method=rhn
+	# sh openshift.sh install_components=node cartridges=all,-jboss,-jenkins,-postgres,-diy domain=apps.example.com hosts_domain=hosts.example.com named_ip_addr=$host1 node_hostname=node.hosts.example.com node_ip_addr=$host2 install_method=rhsm
 
 The installation script will take a while depending on the speed of the connection at your location and the number of RPM packages that need to be installed.  During this time, the instructor will lecture about the architecture of OpenShift Enterprise.
 
