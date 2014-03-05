@@ -153,6 +153,22 @@ If you do not see the new cartridges available on the management console, check 
 
 	# cd /usr/libexec/openshift/cartridges
 	# ls
+
+If you do not see the cartridge in this directory, the RPM was not installed correctly.
+
+Check that they have been installed into the cartridge repository:
+
+  # cd /var/lib/openshift/.cartridge_repository
+  # ls
+  # oo-admin-cartridge --list
+
+If you do not see the cartridge in the *.cartridge_repository* directory and the output of *oo-admin-cartridge --list*, you may need to restart the *ruby193-mcollective* service.
+
+Verify that your OpenShift node is reporting the correct list of cartridges to your OpenShift broker:
+
+  # oo-mco rpc -q openshift cartridge_repository action=list
+
+You may also need to clear the broker's and console's caches again, as described earlier in this lab.
 	
 ##**Installing the PostgreSQL and DIY cartridges**
 
