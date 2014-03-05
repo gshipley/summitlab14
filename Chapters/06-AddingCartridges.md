@@ -9,12 +9,37 @@
 **Tools used:**
 
 * yum
+* oo-admin-yum-validator
 
-By default, OpenShift Enterprise caches certain values for faster retrieval. Clearing this cache allows the retrieval of updated settings.
+There are several steps to installing a cartridge on OpenShift Enterprise. First, as one might expect, it is necessary to install the RPM package for the cartridge on all of your OpenShift node hosts so that the cartridge's files will be in the filesystem.
 
-For example, the first time MCollective retrieves the list of cartridges available on your nodes, the list is cached so that subsequent requests for this information are processed more quickly. If you install a new cartridge, it is unavailable to users until the cache is cleared and MCollective retrieves a new list of cartridges. 
+The OpenShift Enterprise node runtime maintains a *cartridge repository*. After installing the RPM for a cartridge, it is necessary to register the cartridge with the node runtime, which will copy the cartridge's files and metadata into the cartridge repository.
+
+The OpenShift Enterprise broker gets the list of available cartridges by querying the OpenShift nodes via MCollective. The first time the broker retrieves the list of available cartridges, the broker caches the response so that subsequent requests for this information will be processed more quickly. If you install a new cartridge, it is unavailable to users until the broker's cache is cleared and MCollective retrieves a new list of cartridges. 
 
 This lab will focus on installing cartridges to allow OpenShift Enterprise to create JBoss gears.
+
+##**Configuring Red Hat Network Channels**
+
+When we installed our OpenShift node host in an earlier lab, we told the *openshift.sh* installation script to install the node component with an explicit list of cartridges.  As part of the installation process, *openshift.sh* ran the *oo-admin-yum-validator* tool to adjust and validate the Yum channel configuration.
+
+Because OpenShift Enterprise is a layered product that incorporates many technologies, it downloads packages from many channels, which must be enabled.  Moreover, these channels sometimes have conflicting packages that can cause dependency resolution errors during installation or other problems at runtime, and so it is necessary to set appropriate priorities and sometimes specific package exclusions.  The OpenShift Enterprise team wrote the *oo-admin-yum-validator* tool to perform all this configuration automatically.
+
+Recall that we installed an OpenShift node without JBoss cartridges, *oo-admin-yum-validator* thus configured the host with only the standard Red Hat Enterprise Linux and OpenShift Enterprise Node channels.  To install the JBoss cartridge RPMs and the JBoss RPMs packages on which the cartridges depend, we need several additional channels enabled.
+
+Run the following command to enable these additional channels.
+
+**Note:  Run the following command on the node host.**
+
+  # oo-admin-yum-validator -o 2.0 --fix-all --role node-eap
+
+The above command tells *oo-admin-yum-validator* that we the Yum channels on the current host configured appropriately for OpenShift Enterprise 2.0 running in the "node-eap" role, which means an OpenShift node host with the JBossEAP cartridge.  (The "node" and "node-eap" roles both include non-JBoss packages as well, so you do not lose access to other technologies when you enable the "node-eap" role for JBoss technologies.) The above command should make the necessary configuration adjustments for you.  After it runs, run it again without the *--fix-all* option in order to validate the configuration:
+
+**Note:  Run the following command on the node host.**
+
+  # oo-admin-yum-validator -o 2.0 --role node-eap
+
+If the above command detects no problems, you should now be able to install the needed RPM packages.
 
 ##**Listing available cartridges for your subscription**
 
@@ -24,7 +49,7 @@ For a complete list of all cartridges that you are entitled to install,  you can
 
 	# yum search origin-cartridge
 
-During this lab, you should see the following cartridges available to install:
+You should see the following cartridges available to install:
 
 openshift-origin-cartridge-cron.noarch : Embedded cron support for OpenShift
 openshift-origin-cartridge-diy.noarch : DIY cartridge
@@ -52,6 +77,40 @@ In order to enable consumers of the PaaS to create JBoss gears, we will need to 
 The above command will allow users to create JBoss EAP and JBoss EWS gears.  We also installed support for the Jenkins continuous integration environment which we will cover in a later lab.  At the time of this writing, the above command will download and install an additional 285 packages on your node host.
 
 **Note:** Depending on your connection and speed of your node host, this installation make take several minutes.  
+
+##**Updating the cartridge repository**
+
+Once the RPM packages for the JBoss and Jenkins cartridges are installed, we need to restart the OpenShift node runtime so that it will detect these cartridges and install them into its cartridge repository. The runtime is implemented as an MCollective agent. Run the following command to restart it:
+
+**Note:  Execute the following on the node host.**
+
+  # service ruby193-mcollective restart
+
+You can verify that the cartridges are in the cartridge repository with the *oo-admin-cartridge* command.
+
+**Note:  Execute the following on the node host.**
+
+  # oo-admin-cartridge --list
+  (redhat, jenkins, 1, 0.0.6)
+  (redhat, python, 2.6, 0.0.8)
+  (redhat, python, 2.7, 0.0.8)
+  (redhat, ruby, 1.8, 0.0.10)
+  (redhat, ruby, 1.9, 0.0.10)
+  (redhat, jenkins-client, 1, 0.0.5)
+  (redhat, nodejs, 0.10, 0.0.8)
+  (redhat, diy, 0.1, 0.0.5)
+  (redhat, jbossews, 1.0, 0.0.9)
+  (redhat, jbossews, 2.0, 0.0.9)
+  (redhat, cron, 1.4, 0.0.8)
+  (redhat, php, 5.3, 0.0.8)
+  (redhat, postgresql, 8.4, 0.3.6)
+  (redhat, postgresql, 9.2, 0.3.6)
+  (redhat, mysql, 5.1, 0.2.6)
+  (redhat, jbosseap, 6, 0.0.8)
+  (redhat, perl, 5.10, 0.0.7)
+  (redhat, haproxy, 1.4, 0.0.9)
+
+Verify that you see the "jenkins," "jenkins-client," "jbossews" (1.0 and 2.0), and "jbosseap" cartridges in the output when you run the command.
 
 ##**Clearing the broker application cache**
 
