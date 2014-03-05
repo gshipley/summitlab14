@@ -91,12 +91,10 @@ You can verify that the cartridges are in the cartridge repository with the *oo-
 **Note:  Execute the following on the node host.**
 
   # oo-admin-cartridge --list
-  (redhat, jenkins, 1, 0.0.6)
   (redhat, python, 2.6, 0.0.8)
   (redhat, python, 2.7, 0.0.8)
   (redhat, ruby, 1.8, 0.0.10)
   (redhat, ruby, 1.9, 0.0.10)
-  (redhat, jenkins-client, 1, 0.0.5)
   (redhat, nodejs, 0.10, 0.0.8)
   (redhat, diy, 0.1, 0.0.5)
   (redhat, jbossews, 1.0, 0.0.9)
@@ -110,7 +108,7 @@ You can verify that the cartridges are in the cartridge repository with the *oo-
   (redhat, perl, 5.10, 0.0.7)
   (redhat, haproxy, 1.4, 0.0.9)
 
-Verify that you see the "jenkins," "jenkins-client," "jbossews" (1.0 and 2.0), and "jbosseap" cartridges in the output when you run the command.
+Verify that you see the "jbossews" (1.0 and 2.0) and "jbosseap" cartridges in the output when you run the command.
 
 ##**Clearing the broker application cache**
 
