@@ -108,23 +108,7 @@ The first thing we want to ensure is that the ActiveMQ daemon is running.  Perfo
 
 	# service activemq status
 
-By default, the ActiveMQ console is only available on the broker host and is protected with a username and password.  The default password for the *admin* user is a randomly generated string and is located in the */etc/activemq/jetty-realm.properties* file.  To view the password for the *admin* user, enter in the following command:
-
-**Note:** Perform the following on the broker host.
-
-	# grep admin: /etc/activemq/jetty-realm.properties
-	
-The output will list the authentication information for the user as shown below:
-
-		admin: 214f110b48089e2c7a6e800a9678ae8a6cd7c9a317fed3a5943764232a9bb2ea5c847f962ede34c9df11151ba33732377df6b074c2dce13169b9a0e2734f4894, admin
-		
-The long random string is the password for the *admin* user.  Let's verify the topics are up and running by using the curl command on the broker host:
-
-	# curl --user admin:YOURPASSWORDHERE --silent http://localhost:8161/admin/xml/topics.jsp | grep -A 4 topic
-	
-You should see a list of topics scroll by on your screen.
-
-Now that we know that ActiveMQ is up and running and has topics, let's verify that MCollective is able to communicate between the broker and the node hosts.  To very this, use the *oo-mco ping* command.
+Now that we know that ActiveMQ is up and running, let's verify that MCollective is able to communicate between the broker and the node hosts.  To verify this, use the *oo-mco ping* command.
 
 **Note:** Execute the following on the broker host
 
