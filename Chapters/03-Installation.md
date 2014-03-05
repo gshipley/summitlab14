@@ -74,7 +74,7 @@ Now let's execute *openshift.sh*.
 
 **Note:** Perform the following command on the broker host.
 
-	# sh openshift.sh install_components=broker,named,activemq,datastore domain=apps.example.com hosts_domain=hosts.example.com broker_hostname=broker.hosts.example.com named_ip_addr=$host1 named_entries=broker:$host1,activemq:$host1,datastore:$host1,node:$host2 install_method=rhn
+	# sh openshift.sh install_components=broker,named,activemq,datastore domain=apps.example.com hosts_domain=hosts.example.com broker_hostname=broker.hosts.example.com named_ip_addr=$host1 named_entries=broker:$host1,activemq:$host1,datastore:$host1,node:$host2 install_method=rhsm
 
 The installation script will take a while depending on the speed of the connection at your location.  While the installation script runs on the OpenShift broker host, open a new terminal window or tab and continue on to the next section to begin the installation and configuration of your second host which will be the node host.
 
@@ -130,7 +130,7 @@ I would enter in the following command:
 
 Now launch the installation script:
 
-	# sh openshift.sh install_components=node cartridges=all,-jboss,-jenkins,-postgres,-diy domain=apps.example.com hosts_domain=hosts.example.com named_ip_addr=$host1 node_hostname=node.hosts.example.com node_ip_addr=$host2 install_method=rhn
+	# sh openshift.sh install_components=node cartridges=all,-jboss,-jenkins,-postgres,-diy domain=apps.example.com hosts_domain=hosts.example.com named_ip_addr=$host1 node_hostname=node.hosts.example.com node_ip_addr=$host2 install_method=rhsm
 
 The installation script will take a while depending on the speed of the connection at your location and the number of RPM packages that need to be installed.  During this time, the instructor will lecture about the architecture of OpenShift Enterprise.
 
