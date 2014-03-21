@@ -18,7 +18,7 @@ A copy of *openshift.sh* has already been loaded on each system provided to you.
 
 ##**Installing and Configuring the OpenShift Broker host using *openshift.sh***
 
-The *openshift.sh* script takes arguments in the form of environment variables or command-line arguments.  All of the recognized arguments are documented extensively in comments at the top of the script.  For our purposes, we will want to specify the following arguments when we use this script to install the broker host:
+The *openshift.sh* script takes arguments, in the form of environment variables or command-line arguments, to specify settings for the script.  All of the recognized settings are documented extensively in comments at the top of the script.  For our purposes, we will want to specify the following settings when we use this script to install the broker host:
 
 * *install_components=broker,named,activemq,datastore*
 * *domain=apps.example.com*
@@ -65,17 +65,34 @@ I would enter in the following command:
 
 	# host1=209.132.179.41; host2=209.132.179.75
 
-Now let's execute *openshift.sh*.
+Next, for *openshift.sh*, set the following environment variables:
 
 **Note:** Perform the following command on the broker host.
 
-	# sh openshift.sh install_components=broker,named,activemq,datastore domain=apps.example.com hosts_domain=hosts.example.com broker_hostname=broker.hosts.example.com named_ip_addr=$host1 named_entries=broker:$host1,activemq:$host1,datastore:$host1,node:$host2
+	export CONF_INSTALL_COMPONENTS=broker,named,activemq,datastore
+	export CONF_DOMAIN=apps.example.com
+	export CONF_HOSTS_DOMAIN=hosts.example.com
+	export CONF_BROKER_HOSTNAME=broker.hosts.example.com
+	export CONF_NAMED_IP_ADDR=$host1
+	export CONF_NAMED_ENTRIES=broker:$host1,activemq:$host1,datastore:$host1,node:$host2
+
+While we could use the corresponding command-line arguments to specify these settings, we will use environment variables to force ourselves to be careful.  After setting the above variables, run the following command and verify that the variables have all been set as described above, with IP addresses substituted appropriately:
+
+	env | grep CONF_
+
+**Note:** Verify that the settings are correct.
+
+Now let's execute *openshift.sh*.  Note that we will use the *tee* command to make an installation log.
+
+**Note:** Perform the following command on the broker host.
+
+	# sh openshift.sh |& tee broker-install.log
 
 The installation script will take a while depending on the speed of the connection at your location.  While the installation script runs on the OpenShift broker host, open a new terminal window or tab and continue on to the next section to begin the installation and configuration of your second host which will be the node host.
 
 ##**Installing and Configuring the OpenShift Node host**
 
-To install and configure the OpenShift node host, we will want to specify the following arguments to *openshift.sh*:
+To install and configure the OpenShift node host, we will want to specify the following settings to *openshift.sh*:
 
 * *install_components=node*
 * *cartridges=all,-jboss,-jenkins,-postgres,-diy*
@@ -119,9 +136,25 @@ I would enter in the following command:
 
 	# host1=209.132.179.41; host2=209.132.179.75
 
+Next, set the following environment variables:
+
+	export CONF_INSTALL_COMPONENTS=node
+	export CONF_CARTRIDGES=all,-jboss,-jenkins,-postgres,-diy
+	export CONF_DOMAIN=apps.example.com
+	export CONF_HOSTS_DOMAIN=hosts.example.com
+	export CONF_NAMED_IP_ADDR=$host1
+	export CONF_NODE_HOSTNAME=node.hosts.example.com
+	export CONF_NODE_IP_ADDR=$host2
+
+Run the following command and verify that the settings are correct, with the appropriate IP addresses substituted:
+
+	env | grep CONF_
+
+**Note:** Verify that the settings are correct.
+
 Now launch the installation script:
 
-	# sh openshift.sh install_components=node cartridges=all,-jboss,-jenkins,-postgres,-diy domain=apps.example.com hosts_domain=hosts.example.com named_ip_addr=$host1 node_hostname=node.hosts.example.com node_ip_addr=$host2
+	# sh openshift.sh |& tee node-install.log
 
 The installation script will take a while depending on the speed of the connection at your location and the number of RPM packages that need to be installed.  During this time, the instructor will lecture about the architecture of OpenShift Enterprise.
 
