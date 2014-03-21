@@ -26,7 +26,6 @@ The *openshift.sh* script takes arguments in the form of environment variables o
 * *broker_hostname=broker.hosts.example.com*
 * *named_ip_addr={host1 IP address}*
 * *named_entries=named_entries=broker:{host1 IP address},activemq:{host1 IP address},datastore:{host1 IP address},node:{host2 IP address}*
-* *install_method=rhsm*
 
 Let's go over each of these options in more detail.
 
@@ -47,10 +46,6 @@ While it is not required to do so, it is good practice to put your infrastructur
 The *broker_hostname* setting specifies the fully-qualified hostname that the installation script will configure for the OpenShift broker host.  In a more complex configuration with redundant brokers, you will want to use this setting to specify a unique hostname for each host that you install (e.g.,* broker_hostname=broker01.hosts.example.com* on the first host, *broker_hostname=broker02.hosts.example.com* on the second host, and so on).  For this training session, we will only be installing one broker host.
 
 For the *named_ip_addr* setting, use the 209.x.x.x address of *host1* that was provided to you by your instructor.  We will be installing our nameserver alongside the OpenShift broker on this host, so we want to make sure that we configure the host to use itself as its own nameserver.  The *named_entries* is used when the host installs the nameserver to add DNS records for the various hosts and services we will be installing.  We tell the installation script to create records with the public-facing IP addresses for these hosts (as opposed to the private, internal IP addresses).
-
-### *install_method* ###
-
-The installation script supports several installation methods.  For this training session, we are using the Red Hat Network Classic, which we specify using the *install_method* setting.  The host is already registered with Red Hat Network, and the required channels are already in place, so we do not need the installation script to perform these tasks for us; however, we specify this option so that the installation script will verify that the required channels are enabled and configure appropriate priorities and excludes so that Yum downloads the correct packages.
 
 ### Executing *openshift.sh* ###
 
@@ -80,7 +75,7 @@ Now let's execute *openshift.sh*.
 
 **Note:** Perform the following command on the broker host.
 
-	# sh openshift.sh install_components=broker,named,activemq,datastore domain=apps.example.com hosts_domain=hosts.example.com broker_hostname=broker.hosts.example.com named_ip_addr=$host1 named_entries=broker:$host1,activemq:$host1,datastore:$host1,node:$host2 install_method=rhsm
+	# sh openshift.sh install_components=broker,named,activemq,datastore domain=apps.example.com hosts_domain=hosts.example.com broker_hostname=broker.hosts.example.com named_ip_addr=$host1 named_entries=broker:$host1,activemq:$host1,datastore:$host1,node:$host2
 
 The installation script will take a while depending on the speed of the connection at your location.  While the installation script runs on the OpenShift broker host, open a new terminal window or tab and continue on to the next section to begin the installation and configuration of your second host which will be the node host.
 
@@ -94,7 +89,6 @@ To install and configure the OpenShift node host, we will want to specify the fo
 * *named_ip_addr={host1 IP address}*
 * *node_hostname=node.hosts.example.com*
 * *node_ip_addr={host2 IP address}*
-* *install_method=rhsm*
 
 Following is an explanation for each of these arguments.
 
@@ -111,10 +105,6 @@ For the *named_ip_addr* setting, use the 209.x.x.x address for *host1* that was 
 The *node_hostname* setting specifies the fully-qualified hostname that the installation script will configure for the OpenShift node host.
 
 For the *named_ip_addr* setting, use the 209.x.x.x address for *host2* that was provided to you by your instructor. We use the *node_ip_addr* setting to tell the installation script to configure this OpenShift node host to use its public-facing IP address when it configures routing rules for user applications.
-
-### *install_method* ###
-
-Just as when we installed the OpenShift broker host, we must specify the *install_method* setting in order for *openshift.sh* to configure Yum channels correctly.
 
 ### Executing *openshift.sh* ###
 
@@ -142,7 +132,7 @@ I would enter in the following command:
 
 Now launch the installation script:
 
-	# sh openshift.sh install_components=node cartridges=all,-jboss,-jenkins,-postgres,-diy domain=apps.example.com hosts_domain=hosts.example.com named_ip_addr=$host1 node_hostname=node.hosts.example.com node_ip_addr=$host2 install_method=rhsm
+	# sh openshift.sh install_components=node cartridges=all,-jboss,-jenkins,-postgres,-diy domain=apps.example.com hosts_domain=hosts.example.com named_ip_addr=$host1 node_hostname=node.hosts.example.com node_ip_addr=$host2
 
 The installation script will take a while depending on the speed of the connection at your location and the number of RPM packages that need to be installed.  During this time, the instructor will lecture about the architecture of OpenShift Enterprise.
 
