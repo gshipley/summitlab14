@@ -49,12 +49,6 @@ For the *named_ip_addr* setting, use the 209.x.x.x address of *host1* that was p
 
 ### Executing *openshift.sh* ###
 
-**Tip:** When executing *openshift.sh*, it is a good idea to log its output for reference in case you later need to diagnose the installation.  One simple way to log this output is to use the GNU Screen program, which is already installed on the hosts you have been provided.  If you are not already in a GNU Screen session, use the following command to start a new session with logging enabled:
-
-	# screen -L
-
-You can continue this lab and subsequent labs within this GNU Screen session.
-
 Let's go ahead and execute the command to run installation script.
 
 For own use, set the *host1* and *host2* environment variables:
@@ -108,12 +102,6 @@ The *node_hostname* setting specifies the fully-qualified hostname that the inst
 For the *named_ip_addr* setting, use the 209.x.x.x address for *host2* that was provided to you by your instructor. We use the *node_ip_addr* setting to tell the installation script to configure this OpenShift node host to use its public-facing IP address when it configures routing rules for user applications.
 
 ### Executing *openshift.sh* ###
-
-**Tip:** It is recommended to log the output of *openshift.sh* using a utility such as GNU Screen.  If you are not already in a GNU Screen session, use the following command to start a new session with logging enabled:
-
-	# screen -L
-
-You can continue this lab and subsequent labs within this GNU Screen session.
 
 Before we execute the command to run installation script, let's set the *host1* and *host2* environment variables as we did on the broker host:
 
