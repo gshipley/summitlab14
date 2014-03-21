@@ -86,6 +86,7 @@ To install and configure the OpenShift node host, we will want to specify the fo
 * *install_components=node*
 * *cartridges=all,-jboss,-jenkins,-postgres,-diy*
 * *domain=apps.example.com*
+* *hosts_domain=hosts.example.com*
 * *named_ip_addr={host1 IP address}*
 * *node_hostname=node.hosts.example.com*
 * *node_ip_addr={host2 IP address}*
