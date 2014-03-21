@@ -19,7 +19,7 @@ In this lab, we are going to use the latest version of JBoss Tools.  In order to
 Once you have Eclipse installed, go to the JBoss Tools page located at
 
 	http://www.jboss.org/tools
-	
+
 and follow the instructions to install JBoss Tools 4.1 (Kepler).  While you are welcome to install all of the JBoss Tools, we will only be using the JBoss OpenShift Tools for this lab.
 
 ##**Create an OpenShift Enterprise application**
@@ -32,7 +32,7 @@ Once you click on the link to create a new OpenShift Enterprise application, you
 
 ![](http://training.runcloudrun.com/images/jbosstools2.png)
 
-After clicking *next*, the JBoss Tools plugin will authenticate you to the broker host and present another dialog box to you.  On this dialog box, you have the option of creating a new application, or to use an existing one.  Since we already have a JBoss EAP application deployed, let's select to *Use existing application* and click the *Browse* button.  After clicking the *Browse* button, a REST API call will be made to the broker host to retrieve the existing applications that you already have deployed.  
+After clicking *next*, the JBoss Tools plugin will authenticate you to the broker host and present another dialog box to you.  On this dialog box, you have the option of creating a new application, or to use an existing one.  Since we already have a JBoss EAP application deployed, let's select to *Use existing application* and click the *Browse* button.  After clicking the *Browse* button, a REST API call will be made to the broker host to retrieve the existing applications that you already have deployed.
 
 ![](http://training.runcloudrun.com/images/jbosstools3.png)
 
@@ -78,7 +78,7 @@ For the next section of this lab, ensure that you click on *Start Forwarding* so
 Download the latest PostgreSQL driver from the following location:
 
 	http://jdbc.postgresql.org/download.html
-	
+
 and save it to your local computer.  Once you have the file downloaded, click on the *Data Source Explorer* tab, right click on *Database Connection*, and select *New*.  This will open the following dialog where you will want to select PostgreSQL:
 
 ![](http://training.runcloudrun.com/images/db1.png)
@@ -89,10 +89,10 @@ Now that you have added the driver, the dialog box will display the available dr
 
 * Database: todo
 * URL: jdbc:postgresql://127.0.0.1:5432/todo
-* User name: admin	
+* User name: admin
 * Password: The password supplied by OpenShift.  If you forgot this, use the *Environment Variables* utility provided by JBoss Tools.
 
-In order to verify that your port-forwarding and database connection are setup correctly, press the *test connection* button.  If your connection is failing, make sure that you have the correct authorization credentials and that port-fowarding is started via JBoss Tools.
+In order to verify that your port-forwarding and database connection are setup correctly, press the *test connection* button.  If your connection is failing, make sure that you have the correct authorization credentials and that port-forwarding is started via JBoss Tools.
 
 Once you have correctly added the database connection, you should now see the remote database from the OpenShift Enterprise node host available for use in your Eclipse IDE.
 
@@ -105,11 +105,11 @@ At this point, you should be able to use any of the database tools provided by E
 In the project view, expand the source files for the *src/main/webapp* directory and edit the *todo.xhtml* source file.  Change the following line
 
 	<h2>Todo List Creation using Jenkins</h2>
-	
+
 to the include JBoss Tools
 
 	<h2>Todo List Creation using Jenkins and JBoss Tools</h2>
-	
+
 Once you have made the source code change, save the contents of the file and then use the *Team* functionality by right-clicking on your project.  Commit and push the changes to your OpenShift Enterprise server.  This push will follow the same workflow used previously by initiating a build on your Jenkins server.
 
 ![](http://training.runcloudrun.com/images/tools1.png)
@@ -121,7 +121,7 @@ After you push your changes, open up your Jenkins dashboard and open the *Consol
 Verify that your changes were deployed correctly by opening up a web browser and going to the following URL:
 
 	http://todo-ose.example.com/	
-	
+
 ![](http://training.runcloudrun.com/images/tools3.png)
 
 **Lab 20 Complete!**

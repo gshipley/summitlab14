@@ -16,10 +16,10 @@ JBoss Enterprise Application Platform 6 (JBoss EAP 6) is a fully compliant Java 
 
 ##**Create a JBoss EAP application**
 
-In order to create a JBoss EAP appication runtime, enter in the following command:
+In order to create a JBoss EAP application runtime, enter in the following command:
 
 	$ rhc app create todo jbosseap
-	
+
 Just as we saw in previous labs, a template has been deployed for you at the following URL:
 
 	http://todo-ose.apps.example.com
@@ -55,7 +55,7 @@ You should see the following output:
 	  Cloned to:  /Users/gshipley/code/ose/scaledapp/myjavademo/src/test/todo
 
 	Run 'rhc show-app todo' for more details about your app.
-	
+
 Verify that the application has been deployed and the template is displaying correctly in your web browser.
 
 	http://todo-ose.apps.example.com
@@ -96,7 +96,7 @@ At this point, we should have an application named *todo* created as well as hav
 **Note:** The source code for this application is available on Github at the following URL:
 
 	https://github.com/gshipley/todo-javaee6
-	
+
 If you want the easy way out, use the information you have learned from a previous lab to add the above repository as a remote repository and then pull in the source code while overwriting the existing template.  Then skip ahead to the section on deploying the application.
 
 The first thing that we have to do is to create the domain model for the *todo application*. The application will have a single entity named *Todo* as shown below. The entity shown below is a simple JPA entity with JPA and bean validation annotations.  Create a source file named *Todo.java* in the *todo/src/main/java/com/todo/domain* directory with the following contents:
@@ -185,7 +185,7 @@ The first thing that we have to do is to create the domain model for the *todo a
 		}
 	
 	}
-	
+
 ###**Create the *persistence.xml* file**
 
 The persistence.xml file is a standard configuration file in JPA that defines your data source.  It has to be included in the *META-INF* directory inside of the JAR file that contains the entity beans. The persistence.xml file must define a persistence-unit with a unique name. Create a *META-INF* directory under src/main/resources and then create the *persistence.xml* file with the contents below:
@@ -240,7 +240,7 @@ Next we will create a stateless EJB bean named *TodoService* in the *com.todo.se
 	                return todo;
 	        }
 	}
-	
+
 ###**Enable CDI**
 
 CDI, or Context and Dependency Injection, is a Java EE 6 specification which enables dependency injection in a Java EE 6 project. To enable CDI in the *todo* project, create a *beans.xml* file in *src/main/webapp/WEB-INF* directory with the following contents:
@@ -324,7 +324,7 @@ Next we will create a *TodoRestService* class which will expose two methods that
 			return todo;
 		}
 	}
-	
+
 ##**Deploy the *todo* application to OpenShift Enterprise**
 
 Now that we have our application created, we need to push our changes to the OpenShift Enterprise gear that we created earlier in this lab.  From the application root directory, issue the following commands:
@@ -332,7 +332,7 @@ Now that we have our application created, we need to push our changes to the Ope
 	$ git add .
 	$ git commit -am "Adding source code"
 	$ git push
-	
+
 Once you execute the *git push* command, the application will begin building on the OpenShift Enterprise node host.  During this training class, the OpenStack virtual machines we have created are not production-grade environments.  Because of this, the build process will take some time to complete.  Sit back, be patient, and help your fellow classmates who may be having problems.
 
 ##**Testing the *todo* application**
@@ -340,11 +340,11 @@ Once you execute the *git push* command, the application will begin building on 
 In order to test out the RESTful web service that we created in this lab, we can add and retrieve todo items using the *curl* command line utility.  To add a new item, enter the following command:
 
 	$ curl -k -i -X POST -H "Content-Type: application/json" -d '{"todo":"Sell a lot of OpenShift Enterprise","tags":["javascript","ui"]}' https://todo-ose.apps.example.com/rest/todos
-	
+
 To list all available todo items, run the following command:
 
 	$ curl -k -i -H "Accept: application/json" https://todo-ose.apps.example.com/rest/todos/1
-	
+
 You should see the following output:
 
 	HTTP/1.1 200 OK
@@ -355,11 +355,11 @@ You should see the following output:
 	Transfer-Encoding: chunked
 	
 	{"id":1,"todo":"Sell a lot of OpenShift Enterprise","tags":["javascript","ui"],"createdOn":1359086546955}
-	
+
 If you downloaded and deployed the source code from the Git repository, the project contains a JSF UI component which will allow you to test the application using your web browser.  Simply point your browser to
 
 	http://todo-ose.apps.example.com
-	
+
 to verify that the application was deployed correctly.
 
 ![](http://training.runcloudrun.com/ose2/todoApp.png)

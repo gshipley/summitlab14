@@ -20,16 +20,16 @@ Please verify now that your machines have the required channels enabled:
 **Note:** Execute the following on both of the hosts that have been provided to you
 
 	# yum repolist
-	
+
 You should see the following list of channels:
 
-  rhel-6-server-cf-tools-1-rpms      Red Hat CloudForms Tools for RHEL 6 (RPMs)
-  rhel-6-server-ose-2.0-infra-rpms   Red Hat OpenShift Enterprise 2.0 Infrastructure (RPMs)
-  rhel-6-server-ose-2.0-node-rpms    Red Hat OpenShift Enterprise 2.0 Application Node (RPMs)
-  rhel-6-server-rpms                 Red Hat Enterprise Linux 6 Server (RPMs)
+	rhel-6-server-cf-tools-1-rpms      Red Hat CloudForms Tools for RHEL 6 (RPMs)
+	rhel-6-server-ose-2.0-infra-rpms   Red Hat OpenShift Enterprise 2.0 Infrastructure (RPMs)
+	rhel-6-server-ose-2.0-node-rpms    Red Hat OpenShift Enterprise 2.0 Application Node (RPMs)
+	rhel-6-server-rpms                 Red Hat Enterprise Linux 6 Server (RPMs)
 
 Note that if you were registered using Red Hat Network, the channels would be named using a different format.
-	
+
 **Lab 2 Complete!**
 
 <!--BREAK-->

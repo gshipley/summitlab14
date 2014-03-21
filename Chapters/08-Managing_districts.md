@@ -10,11 +10,11 @@
 * text editor
 * oo-admin-ctl-district
 
-Districts define a set of node hosts within which gears can be easily moved to load-balance the resource usage of those nodes. While not required for a basic OpenShift Enterprise installation, districts provide several administrative benefits and their use is recommended.
+Districts define a set of node hosts within which gears can be easily moved to load-balance the resource usage of those nodes. While not required for a proof-of-concept OpenShift Enterprise installation, districts provide several administrative benefits and their use is essentially required in production.
 
 Districts allow a gear to maintain the same UUID (and related IP addresses, MCS levels, and ports) across any node within the district, so that applications continue to function normally when moved between nodes in the same district. All nodes within a district have the same profile, meaning that all the gears on those nodes are the same size (for example, small or medium). There is a hard limit of 6000 gears per district.
 
-This means, for example, that developers who hard-code environment settings into their applications instead of using environment variables will not experience problems due to gear migrations between nodes. The application continues to function normally because exactly the same environment is reserved for the gear on every node in the district. This saves developers and administrators time and effort. 
+This means, for example, that developers who hard-code environment settings into their applications instead of using environment variables will not experience problems due to gear migrations between nodes. The application continues to function normally because exactly the same environment is reserved for the gear on every node in the district. This saves developers and administrators time and effort.
 
 ##**Enabling districts**
 
@@ -25,7 +25,7 @@ To use districts, the broker's MCollective plugin must be configured to enable d
 	DISTRICTS_ENABLED=true
 	NODE_PROFILE_ENABLED=true
 	
-While you are viewing this file, you may notice the *DISTRICTS_REQUIRE_FOR_APP_CREATE=false* setting.  Enabling this option prevents users from creating a new application if there are no districts defined or if all districts are at max capacity.  
+While you are viewing this file, you may notice the *DISTRICTS_REQUIRE_FOR_APP_CREATE=false* setting.  Enabling this option prevents users from creating a new application if there are no districts defined or if all districts are at max capacity.
 
 ##**Creating and populating districts**
 
@@ -34,7 +34,7 @@ To create a district that will support a gear type of small, we will use the *oo
 **Note: Execute the following on the broker host.**
 
 	# oo-admin-ctl-district -c create -n small_district -p small
-	
+
 If the command was successful, you should see output similar to the following:
 
 	Successfully created district: 513b50508f9f44aeb90090f19d2fd940
@@ -54,11 +54,11 @@ If the command was successful, you should see output similar to the following:
 If you are familiar with JSON, you will understand the format of this output.  What actually happened is a new document was created in the MongoDB database that we installed using the *openshift.sh* installation script.  To view this document inside of the database, execute the following command on the broker host:
 
 	# mongo localhost/openshift_broker -u openshift -p mongopass
-	
-**Note:** The default mongodb username and password can be found in the */etc/openshift/broker.conf* file.
+
+**Note:** The default MongoDB username and password can be found in the */etc/openshift/broker.conf* file.
 
 This will drop you into the mongo shell where you can perform commands against the database.  The first thing we need to do is list all of the available collections in the *openshift_broker* database.  To do so, you can issue the following command:
- 
+
 	> db.getCollectionNames()
 	
 You should see the following collections returned:
@@ -75,7 +75,7 @@ You should see the following collections returned:
 		"usage",
 		"usage_records"
 	]	
-	
+
 We can now query the *district* collection to verify the creation of our small district:
 
 	> db.districts.find()
@@ -97,7 +97,7 @@ Exit the mongo shell by using the exit command:
 Now we can add our node host, node.hosts.example.com, to the *small_district* that we created above:
 
 	# oo-admin-ctl-district -c add-node -n small_district -i node.hosts.example.com
-	
+
 You should see the following output:
 
 	Success!
@@ -113,7 +113,7 @@ You should see the following output:
 	 "max_capacity"=>6000,
 	 "max_uid"=>6999,
 	 "active_server_identities_size"=>1}
-	 
+
 **Note:** If you see an error message indicating that you can't add this node to the district because the node already has applications on it, congratulations -- you worked ahead and have already created an application. To clean this up, you will need to delete both your application and domain that you created.  If you don't know how to do this, ask the instructor.
 
 In order to verify that the information was added to the MongoDB document, enter in the following commands:
@@ -124,13 +124,13 @@ In order to verify that the information was added to the MongoDB document, enter
 You should see the following information in the *server_identities* array.
 
 	"server_identities" : [ { "name" : "node.hosts.example.com", "active" : true } ]
-	
+
 If you continued to add additional nodes to this district, the *server_identities* array would show all the node hosts assigned to the district.
 
 OpenShift Enterprise also provides a command-line tool to display information about a district.  Simply enter the following command to view the JSON information that is stored in the MongoDB database:
 
 	# oo-admin-ctl-district
-	
+
 Once you enter the above command, you should a more human readable version of the document:
 
 	{"_id"=>"52afc6ed3a0fb2e386000001",
@@ -159,7 +159,7 @@ Use the max_active_gears parameter in the */etc/openshift/resource_limits.conf* 
 In order view usage information for your installation, you run use the *oo-stats* command.  Let's view the current state of our district by entering in the following command:
 
 	# oo-stats
-	
+
 You should see information similar to the following:
 
 	------------------------

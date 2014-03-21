@@ -31,13 +31,13 @@ Run the following command to enable these additional channels.
 
 **Note:  Run the following command on the node host.**
 
-  # oo-admin-yum-validator -o 2.0 --fix-all --role node-eap
+	# oo-admin-yum-validator -o 2.0 --fix-all --role node-eap
 
 The above command tells *oo-admin-yum-validator* that we the Yum channels on the current host configured appropriately for OpenShift Enterprise 2.0 running in the "node-eap" role, which means an OpenShift node host with the JBossEAP cartridge.  (The "node" and "node-eap" roles both include non-JBoss packages as well, so you do not lose access to other technologies when you enable the "node-eap" role for JBoss technologies.) The above command should make the necessary configuration adjustments for you.  After it runs, run it again without the *--fix-all* option in order to validate the configuration:
 
 **Note:  Run the following command on the node host.**
 
-  # oo-admin-yum-validator -o 2.0 --role node-eap
+	# oo-admin-yum-validator -o 2.0 --role node-eap
 
 If the above command detects no problems, you should now be able to install the needed RPM packages.
 
@@ -84,29 +84,29 @@ Once the RPM packages for the JBoss and Jenkins cartridges are installed, we nee
 
 **Note:  Execute the following on the node host.**
 
-  # service ruby193-mcollective restart
+	# service ruby193-mcollective restart
 
 You can verify that the cartridges are in the cartridge repository with the *oo-admin-cartridge* command.
 
 **Note:  Execute the following on the node host.**
 
-  # oo-admin-cartridge --list
-  (redhat, python, 2.6, 0.0.8)
-  (redhat, python, 2.7, 0.0.8)
-  (redhat, ruby, 1.8, 0.0.10)
-  (redhat, ruby, 1.9, 0.0.10)
-  (redhat, nodejs, 0.10, 0.0.8)
-  (redhat, diy, 0.1, 0.0.5)
-  (redhat, jbossews, 1.0, 0.0.9)
-  (redhat, jbossews, 2.0, 0.0.9)
-  (redhat, cron, 1.4, 0.0.8)
-  (redhat, php, 5.3, 0.0.8)
-  (redhat, postgresql, 8.4, 0.3.6)
-  (redhat, postgresql, 9.2, 0.3.6)
-  (redhat, mysql, 5.1, 0.2.6)
-  (redhat, jbosseap, 6, 0.0.8)
-  (redhat, perl, 5.10, 0.0.7)
-  (redhat, haproxy, 1.4, 0.0.9)
+	# oo-admin-cartridge --list
+	(redhat, python, 2.6, 0.0.8)
+	(redhat, python, 2.7, 0.0.8)
+	(redhat, ruby, 1.8, 0.0.10)
+	(redhat, ruby, 1.9, 0.0.10)
+	(redhat, nodejs, 0.10, 0.0.8)
+	(redhat, diy, 0.1, 0.0.5)
+	(redhat, jbossews, 1.0, 0.0.9)
+	(redhat, jbossews, 2.0, 0.0.9)
+	(redhat, cron, 1.4, 0.0.8)
+	(redhat, php, 5.3, 0.0.8)
+	(redhat, postgresql, 8.4, 0.3.6)
+	(redhat, postgresql, 9.2, 0.3.6)
+	(redhat, mysql, 5.1, 0.2.6)
+	(redhat, jbosseap, 6, 0.0.8)
+	(redhat, perl, 5.10, 0.0.7)
+	(redhat, haproxy, 1.4, 0.0.9)
 
 Verify that you see the "jbossews" (1.0 and 2.0) and "jbosseap" cartridges in the output when you run the command.
 
@@ -156,17 +156,17 @@ If you do not see the new cartridges available on the management console, check 
 
 If you do not see the cartridge in this directory, the RPM was not installed correctly.
 
-Check that they have been installed into the cartridge repository:
+Check that the cartridges have been installed into the cartridge repository:
 
-  # cd /var/lib/openshift/.cartridge_repository
-  # ls
-  # oo-admin-cartridge --list
+	# cd /var/lib/openshift/.cartridge_repository
+	# ls
+	# oo-admin-cartridge --list
 
 If you do not see the cartridge in the *.cartridge_repository* directory and the output of *oo-admin-cartridge --list*, you may need to restart the *ruby193-mcollective* service.
 
 Verify that your OpenShift node is reporting the correct list of cartridges to your OpenShift broker:
 
-  # oo-mco rpc -q openshift cartridge_repository action=list
+	# oo-mco rpc -q openshift cartridge_repository action=list
 
 You may also need to clear the broker's and console's caches again, as described earlier in this lab.
 	

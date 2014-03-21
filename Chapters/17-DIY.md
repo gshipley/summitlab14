@@ -61,7 +61,7 @@ After executing this command, you should see the following output:
 Now that we have our application created, we can begin the deployment of our custom runtime.  Let's start by changing to the application directory:
 
 	$ cd myjavademo
-	
+
 ##**Deploying application code**
 
 Instead of spending time in this lab with writing a server runtime, we are going to use an existing one that is available on the OpenShift Github page.  This application code is written in Java and consists of a single MyHttpServer main class.  Since this source code lives on the Github OpenShift project page, we need to add the remote Github repository and then pull the remote source code while at the same time overwriting the existing source code we have in our DIY application directory.
@@ -69,20 +69,20 @@ Instead of spending time in this lab with writing a server runtime, we are going
 	$ git remote add upstream git://github.com/openshift/openshift-diy-java-demo.git
 	$ git pull -s recursive -X theirs upstream master
 	$ git push
-	
+
 ##**Verify the DIY application is working**
 
 Once the Java example has been pushed to your OpenShift Enterprise gear, open up a web browser and point to the following URL:
 
 	http://myjavademo-ose.apps.example.com/index.html
-	
+
 **Note:** Make sure to include the index.html file at the end of the URL.
 
 If the application was deployed correctly, you should see a *Hello DIY World!* message.  This little HTTP Java server will serve any files found in your application's html directory, so you can add files or make changes to them, push the contents, and see those reflected in your browser.
 
 ##**Under the covers**
 
-The DIY cartridge provides a number of hooks that are called during the lifecycle actions of the application. The hooks available to you for customization are found in the .openshift/action_hooks directory of your application repository. 
+The DIY cartridge provides a number of hooks that are called during the lifecycle actions of the application. The hooks available to you for customization are found in the .openshift/action_hooks directory of your application repository.
 
 For this application, all that has been customized are the start and stop scripts. They simply launch the MyHttpServer class using Java and perform a *wget* call to have the MyHttpServer stop itself:
 
@@ -108,7 +108,7 @@ Add another source file to your application and verify that it works.  From insi
 	$ echo "Hello from DIY on Enterprise" > test.html
 	$ git add .
 	$ git commit -am "Adding new HTML file"
-	$ push
+	$ git push
 
 Verify that you can view this file by going to the following URL:
 

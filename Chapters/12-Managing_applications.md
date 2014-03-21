@@ -79,8 +79,8 @@ All of the details about an application can be viewed by the *rhc app show* comm
 
 	  php-5.3 (PHP 5.3)
 	  -----------------
-    Gears: 1 small
-    
+	  Gears: 1 small
+
 
 
 ##**Viewing application status**
@@ -203,7 +203,7 @@ You can also view all of the commands available on the application gear shell by
 	mongo           interactive MongoDB shell
 	psql            interactive PostgreSQL shell
 	quota           list disk usage
-	
+
 ##**Viewing log files for an application**
 
 Logs are very important when you want to find out why an error is happening or if you want to check the health of your application. OpenShift Enterprise provides the *rhc tail* command to display the contents of your log files. To view all the options available for the *rhc tail* command, issue the following:
@@ -234,7 +234,7 @@ Logs are very important when you want to find out why an error is happening or i
 The rhc tail command requires that you provide the application name of the logs you would like to view.  To view the log files of our *firstphp* application, use the following command:
 
 	$ rhc tail firstphp
-	
+
 You should see information for both the access and error logs.  While you have the *rhc tail* command open, issue a HTTP get request by pointing your web browser to *http://firstphp-ose.apps.example.com*.  You should see a new entry in the log files that looks similar to this:
 
 	10.10.56.204 - - [22/Jan/2013:18:39:27 -0500] "GET / HTTP/1.1" 200 5242 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8; rv:19.0) Gecko/20100101 Firefox/19.0"
@@ -248,7 +248,7 @@ Now that you know how to view log files by using the *rhc tail* command it is al
 In a previous lab, we configured the application gears to have a disk-usage quota.  You can view the quota of your currently running gear by connecting to the gear node host via SSH as discussed previously in this lab.  Once you are connected to your application gear, enter the following command:
 
 	$ quota -s
-	
+
 If the quota information that we configured earlier is correct, you should see the following information:
 
 	Disk quotas for user e9e92282a16b49e7b78d69822ac53e1d (uid 1000): 
@@ -267,7 +267,7 @@ OpenShift Enterprise supports the use of custom domain names for an application.
 After buying the domain name, you have to add a [CNAME record](http://en.wikipedia.org/wiki/CNAME_record) for the custom domain name.  Once you have created the CNAME record, you can let OpenShift Enterprise know about the CNAME by using the *rhc alias* command.
 
 	$ rhc alias add firstphp www.mycustomdomainname.com
-	
+
 Technically, what OpenShift Enterprise has done under the hood is set up a Vhost in Apache to handle the custom URL.
 
 ##**Adding a custom domain to an application using the management console**
@@ -367,7 +367,7 @@ You will see the following confirmation message:
 Open up a web browser and point to the following URL:
 
 	http://firstphp-ose.apps.example.com
-	
+
 If the restore process worked correctly, you should see the restored application running just as it was before.
 
 
@@ -385,7 +385,7 @@ You can delete an OpenShift Enterprise application by executing the *rhc app del
 	RESULT:
 	Application ‘someAppToDelete’ successfully deleted
 
-There is another variant of this command which does not require the user to confirm the delete opeartion.  To use this variant, pass the *--confirm* flag.
+There is another variant of this command which does not require the user to confirm the delete operation.  To use this variant, pass the *--confirm* flag.
 
 	$ rhc app delete --confirm someAppToDelete
 	
@@ -402,7 +402,7 @@ There is another variant of this command which does not require the user to conf
 You can trigger a thread dump for Ruby and JBoss applications using the *rhc threaddump* command. A thread dump is a snapshot of the state of all threads that are part of the runtime process.  If an application appears to have stalled or is running out of resources, a thread dump can help reveal the state of the runtime, identify what might be causing any issues, and ultimately help resolve the problem. To trigger a thread dump, execute the following command:
 
 	$ rhc threaddump ApplicationName
-	
+
 After running this command for a JBoss or Ruby application, you will be given a log file that you can view in order to see the details of the thread dump.  Issue the following command, substituting the correct log file:
 
 	$ rhc tail ApplicationName -f ruby-1.9/logs/error_log-20130104-000000-EST -o '-n 250'

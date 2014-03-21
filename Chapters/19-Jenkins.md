@@ -22,7 +22,7 @@ There are many reasons why you would want to leverage Jenkins as a continuous in
 * Failed builds do not get deployed (leaving the previous working version in place).
 * More resources to build your application, as each Jenkins build spins up a new gear for short-lived period of time.
 
-Jenkins includes a feature-rich web user interface that provides the ability to trigger builds, customize builds, manage resources, manage plugins, and many other features. 
+Jenkins includes a feature-rich web user interface that provides the ability to trigger builds, customize builds, manage resources, manage plugins, and many other features.
 
 ##**Verify Jenkins cartridges are installed**
 
@@ -31,7 +31,7 @@ SSH to your node host and verify that you have the Jenkins cartridges installed:
 **Note:** Execute the following on the node host
 
 	# rpm -qa |grep jenkins
-	
+
 You should see the following four packages installed:
 
 * jenkins-1.509.1-1.el6op.noarch
@@ -46,7 +46,7 @@ If you do now have the above RPM packages installed on your node host, follow th
 In order to use Jenkins on OpenShift Enterprise, you will need to create an application gear that contains the Jenkins application.  This is done using the *rhc app create* command line tool, or you can use the management console to create the application.  The syntax for using the command line tool is as follows:
 
 	$ rhc app create jenkins jenkins
-	
+
 You should see the following output from this command:
 
 	Using jenkins-1 (Jenkins Server) for 'jenkins'
@@ -91,7 +91,7 @@ Make a note of the username and password that were created for you by OpenShift 
 
 Now that we have a Jenkins server setup and running, we can add support to our *todo* application which will allow all future builds to compile on the Jenkins server.  To embed the Jenkins support cartridge in your application, use the following command:
 
-	$ rhc cartridge-add jenkins-client -a todo
+	$ rhc cartridge add jenkins-client -a todo
 
 The output should be the following:
 
@@ -108,7 +108,7 @@ The output should be the following:
 Verify that the Jenkins client was added to your application by running the following command:
 
 	$ rhc app show todo
-	
+
 
 You should see the following information indicating that Jenkins has been enabled for the *todo* application.
 
@@ -143,7 +143,7 @@ You should see the following information indicating that Jenkins has been enable
 Open up a web browser and point to the following URL:
 
 	https://jenkins-ose.apps.example.com/job/todo-build/
-	
+
 Authenticate to the Jenkins environment by providing the username and password that were displayed after adding the Jenkins application.
 
 ![](http://training.runcloudrun.com/images/jenkins.png)
@@ -206,16 +206,16 @@ The source code for the default build script is as follows:
 Now that you have the Jenkins client embedded into your *todo* application gear, any future *git push* commands will send the code to the Jenkins server for building.  To test this out, edit the *src/main/webapp/todo.xhtml* source file and change the title of the page.  If you do not have this file, just create a new file instead.  Look for the following code block:
 
 	<h2>Todo List Creation</h2>
-	
+
 Change the above code to the following:
 
 	<h2>Todo List Creation using Jenkins</h2>
-	
+
 Commit and push your change:
 
 	$ git commit -am "changed h2"
 	$ git push
-	
+
 After you push your changes to the Jenkins server, you should see the following output:
 
 	Counting objects: 5, done.
@@ -238,7 +238,7 @@ After you push your changes to the Jenkins server, you should see the following 
 While the build is happening, open up a new terminal window and run the following command:
 
 	$ rhc domain show
-	
+
 You will see a new gear that was created by the Jenkins application.  This new gear is a temporary gear that OpenShift Enterprise creates in order to build your application code.
 
 	  todobldr @ http://todobldr-ose.apps.example.com/
@@ -254,7 +254,7 @@ You will see a new gear that was created by the Jenkins application.  This new g
 	    Cartridges
 	    ==========
 	      jbosseap-6.0
-	      
+
 If the build fails, or if you just want to see the output of the Maven build process, you can log in to your Jenkins application, click on the build, and then click the link to view the console output.  Log in to your Jenkins application and view the contents of the last build.
 
 ![](http://training.runcloudrun.com/images/jenkins4.png)
@@ -264,7 +264,7 @@ If the build fails, or if you just want to see the output of the Maven build pro
 One of the great things about integrating your application with the Jenkins CI environment is the ability to start a new build without having to modify and push your source code.  To initiate a new build, log in to the Jenkins dashboard and select the *todo* builder.  Point your browser to:
 
 	https://jenkins-ose.apps.example.com/
-	
+
 Once you have been authenticated, click the *todo-build* link:
 
 ![](http://training.runcloudrun.com/images/jenkins5.png)

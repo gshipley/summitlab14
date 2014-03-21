@@ -12,9 +12,9 @@
 In this lab, we are ready to start using OpenShift Enterprise to create our first application.  To create an application, we will be using the *rhc app* command.  In order to view all of the switches available for the *rhc app* command, enter the following command:
 
 	$ rhc app -h
-	
+
 This will provide you with the following output:
-	
+
 	List of Actions
 	  configure     Configure several properties that apply to an application
 	  create        Create an application
@@ -36,18 +36,18 @@ It is very easy to create an OpenShift Enterprise application using *rhc*. The c
 
 * **Application Name** : The name of the application. The application name can only contain alpha-numeric characters and at max contain only 32 characters.
 
-* **Type**: The type is used to specify which language runtime to use.  
+* **Type**: The type is used to specify which language runtime to use.
 
 Create a directory to hold your OpenShift Enterprise code projects:
 
 	$ cd ~
 	$ mkdir ose
 	$ cd ose
-	
+
 To create an application that uses the *php* runtime, issue the following command:
 
 	$ rhc app create firstphp php-5.3
-	
+
 After entering that command, you should see the following output:
 
 	Application Options
@@ -100,21 +100,21 @@ After you entered the command to create a new PHP application, a lot of things h
 * BIND was updated on the broker host to include an entry for your application.
 
 ##**Understanding the directory structure on the node host**
-	
+
 It is important to understand the directory structure of each OpenShift Enterprise application gear.  For the PHP application that we just created, we can verify and examine the layout of the gear on the node host.  SSH to your node host and execute the following commands:
 
 	# cd /var/lib/openshift
 	# ls
-	
+
 You will see output similar to the following:
 
 	e9e92282a16b49e7b78d69822ac53e1d
-	
+
 The above is the unique user id that was created for your application gear.  Lets examine the contents of this gear by using the following commands:
 
 	# cd e9e92282a16b49e7b78d69822ac53e1d
 	# ls -al
-	
+
 You should see the following directories:
 
 	total 44
@@ -135,7 +135,7 @@ You should see the following directories:
 During a previous lab, where we setup the *rhc* tools, our SSH key was uploaded to the server to enable us to authenticate to the system without having to provide a password.  The SSH key we provided was actually appended to the *authorized_keys* file.  To verify this, use the following command to view the contents of the file:
 
 	# cat .ssh/authorized_keys
-	
+
 You will also notice the following three directories:
 
 * app-root - Contains your core application code as well as your data directory where persistent data is stored.
@@ -153,7 +153,7 @@ When you created the PHP application using the *rhc app create* command, the pri
 
 	$ cd firstphp
 	$ ls -al
-	
+
 You should see the following information:
 
 
@@ -174,7 +174,7 @@ You should see the following information:
 If you are not familiar with the Git revision control system, this is where information about the git repositories that you will be interacting with is stored.  For instance, to list all of the repositories that you are currently setup to use for this project, issue the following command:
 
 	$ cat .git/config
-	
+
 You should see the following information, which specifies the URL for our repository that is hosted on the OpenShift Enterprise node host:
 
 	[core]
@@ -197,7 +197,7 @@ You should see the following information, which specifies the URL for our reposi
 
 ###**.openshift directory**
 
-The .openshift directory is a hidden directory where a user can create action hooks, set markers, and create cron jobs.  
+The .openshift directory is a hidden directory where a user can create action hooks, set markers, and create cron jobs.
 
 Action hooks are scripts that are executed directly, so they can be written in Python, PHP, Ruby, shell, etc.  OpenShift Enterprise supports the following action hooks:
 
@@ -209,7 +209,7 @@ Action hooks are scripts that are executed directly, so they can be written in P
 | pre_build | Executed on your CI system if available.  Otherwise, executed before the build step | 
 [Action Hooks][section-mmd-tables-table1] 
 
-OpenShift Enterprise also supports the ability for a user to schedule jobs to be ran based upon the familiar cron functionality of Linux.  To enable this functionality, you need to add the cron cartridge to your application.  Once you have done so, any scripts or jobs added to the minutely, hourly, daily, weekly or monthly directories will be run on a scheduled basis (frequency is as indicated by the name of the directory) using run-parts.  OpenShift supports the following schedule for cron jobs:
+OpenShift Enterprise also supports the ability for a user to schedule jobs to be run based upon the familiar cron functionality of Linux.  To enable this functionality, you need to add the cron cartridge to your application.  Once you have done so, any scripts or jobs added to the minutely, hourly, daily, weekly or monthly directories will be run on a scheduled basis (frequency is as indicated by the name of the directory) using run-parts.  OpenShift supports the following schedule for cron jobs:
 
 * daily
 * hourly
@@ -291,7 +291,7 @@ Notice that we stop the application runtime (Apache), deploy the code, and then 
 If you completed all of the steps in Lab 16 correctly, you should be able to verify that your application was deployed correctly by opening up a web browser and entering the following URL:
 
 	http://firstphp-ose.apps.example.com
-	
+
 You should see the updated code for the application.
 
 ![](http://training.runcloudrun.com/images/firstphpOSE.png)
@@ -310,16 +310,16 @@ Once you have saved this file, the process for pushing the changes involves addi
 	$ git add .
 	$ git commit -am "Adding time.php"
 	$ git push
-	
+
 ##**Verify code change**
 
 To verify that we have created and deployed the new PHP source file correctly, open up a web browser and enter the following URL:
 
 	http://firstphp-ose.example.com/time.php
-	
+
 You should see the updated code for the application.
 
 ![](http://training.runcloudrun.com/images/firstphpTime.png)
-	
+
 **Lab 11 Complete!**
 <!--BREAK-->

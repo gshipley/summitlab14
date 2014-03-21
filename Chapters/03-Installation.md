@@ -12,7 +12,7 @@
 
 ##**Overview of *openshift.sh***
 
-The OpenShift team has developed a installation script for the platform that simplifies the installation and configuration of the PaaS.  The *openshift.sh* script is a flexible tool to get an environment up and running quickly without having to worry about manually configuring all of the required services.  For a better understanding of how the tool works, it is suggested that the user view the source code of *openshift.sh* to become familiar with the configuration involved in setting up the platform.  For this training class, once the installation of the PaaS has started, the instructor will go over the architecture of the PaaS so that you are familiar with all of the components and their purpose.
+The OpenShift team has developed an installation script for the platform that simplifies the installation and configuration of the PaaS.  The *openshift.sh* script is a flexible tool to get an environment up and running quickly without having to worry about manually configuring all of the required services.  For a better understanding of how the tool works, it is suggested that the user view the source code of *openshift.sh* to become familiar with the configuration involved in setting up the platform.  For this training class, once the installation of the PaaS has started, the instructor will go over the architecture of the PaaS so that you are familiar with all of the components and their purpose.
 
 A copy of *openshift.sh* has already been loaded on each system provided to you.  This script is also available in the [enterprise-2.0 branch of the openshift-extras Github repository](https://github.com/openshift/openshift-extras).  In that repository, you can find a [kickstart version](https://github.com/openshift/openshift-extras/blob/enterprise-2.0/enterprise/install-scripts/openshift.ks) of the script as well as other versions.  The script we will be using is the [generic openshift.sh](https://github.com/openshift/openshift-extras/blob/enterprise-2.0/enterprise/install-scripts/generic/openshift.sh) script.
 
@@ -56,7 +56,7 @@ The installation script supports several installation methods.  For this trainin
 
 **Tip:** When executing *openshift.sh*, it is a good idea to log its output for reference in case you later need to diagnose the installation.  One simple way to log this output is to use the GNU Screen program, which is already installed on the hosts you have been provided.  If you are not already in a GNU Screen session, use the following command to start a new session with logging enabled:
 
-  # screen -L
+	# screen -L
 
 You can continue this lab and subsequent labs within this GNU Screen session.
 
@@ -66,7 +66,7 @@ For own use, set the *host1* and *host2* environment variables:
 
 **Note:** Execute the following command on the broker host and ensure that you replace {host1 IP address} with the broker IP address and {host2 IP address} with the correct node IP address provided to you by the instructor.
 
-  # host1={host1 IP address}; host2={host2 IP address}
+	# host1={host1 IP address}; host2={host2 IP address}
 
 For example, if the instructor gave me the following information:
 * Broker IP Address = 209.132.179.41
@@ -74,7 +74,7 @@ For example, if the instructor gave me the following information:
 
 I would enter in the following command:
 
-    # host1=209.132.179.42; host2=209.132.179.75
+	# host1=209.132.179.41; host2=209.132.179.75
 
 Now let's execute *openshift.sh*.
 
@@ -120,7 +120,7 @@ Just as when we installed the OpenShift broker host, we must specify the *instal
 
 **Tip:** It is recommended to log the output of *openshift.sh* using a utility such as GNU Screen.  If you are not already in a GNU Screen session, use the following command to start a new session with logging enabled:
 
-  # screen -L
+	# screen -L
 
 You can continue this lab and subsequent labs within this GNU Screen session.
 
@@ -128,7 +128,7 @@ Before we execute the command to run installation script, let's set the *host1* 
 
 **Note:** Perform the following command on the node host.
 
-  # host1={host1 IP address}; host2={host2 IP address}
+	# host1={host1 IP address}; host2={host2 IP address}
 
 For example, if the instructor gave me the following information:
 * Broker IP Address = 209.132.179.41
@@ -138,7 +138,7 @@ For example, if the instructor gave me the following information:
 
 I would enter in the following command:
 
-    # host1=209.132.179.41; host2=209.132.179.75
+	# host1=209.132.179.41; host2=209.132.179.75
 
 Now launch the installation script:
 
