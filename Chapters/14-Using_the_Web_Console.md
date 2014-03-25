@@ -19,8 +19,8 @@ Having DNS resolution setup on your local machine, as discussed in a previous la
 Open your favorite web browser and go to the following URL:
 
     http://broker.hosts.example.com
-    
-Once you enter the above URL, you will be asked to authenticate using basic auth.  For this training class, you can use the demo account that has been provided for you.  
+
+Once you enter the above URL, you will be asked to authenticate using basic auth.  For this training class, you can use the demo account that has been provided for you.
 
 ![](http://training.runcloudrun.com/images/consoleAuth.png)
 

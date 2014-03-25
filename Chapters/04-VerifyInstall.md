@@ -100,13 +100,17 @@ If everything with DNS is setup correctly, you should be able to ping node.hosts
 
 ###**Verifying ActiveMQ and MCollective**	
 
-ActiveMQ is a fully open source messenger service that is available for use across many different programming languages and environments.  MCollective is a higher-level framework for remote job execution that communicates over ActiveMQ.  OpenShift Enterprise makes use of these technologies to handle communications between the broker host and the node host in our deployment.  
+ActiveMQ is a fully open source message service that is available for use across many different programming languages and environments.  MCollective is a higher-level framework for remote job execution that communicates over ActiveMQ.  OpenShift Enterprise makes use of these technologies to handle communications between the broker host and the node host in our deployment.  
 
 The first thing we want to ensure is that the ActiveMQ daemon is running.  Perform the following command on the broker host:
 
 **Note:** Execute this command on the broker host
 
 	# service activemq status
+
+The output of the above command should look similar to the following:
+
+	ActiveMQ Broker is running (1211).
 
 Now that we know that ActiveMQ is up and running, let's verify that MCollective is able to communicate between the broker and the node hosts.  To verify this, use the *oo-mco ping* command.
 

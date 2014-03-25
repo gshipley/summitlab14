@@ -61,7 +61,7 @@ To verify that Ruby is correctly installed run:
 
 	$ ruby -e 'puts "Welcome to Ruby"'
 	Welcome to Ruby
-	
+
 ###**Installing Git for OS X**
 
 There are a number of options on Mac OS X for Git. We recommend the Git for OS X installer - download and run the latest version of the dmg file on your system. To verify the [Git for OS X installation](http://code.google.com/p/git-osx-installer/), run:
@@ -98,7 +98,7 @@ The most recent version of the OpenShift Enterprise client tools are available a
 With the correct entitlements in place, you can now install the OpenShift Enterprise 2.0 client tools by running the following command:
 
 	$ sudo yum install rubygem-rhc
-	
+
 If you do not have an OpenShift Enterprise on the system you want to install the client tools on, you can install ruby and rubygems and then issue the following command:
 
 	$ sudo gem install rhc

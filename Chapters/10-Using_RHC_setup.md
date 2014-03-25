@@ -13,8 +13,8 @@
 By default, the RHC command line tool will default to use the publicly hosted OpenShift environment.  Since we are using our own enterprise environment, we need to tell *rhc* to use our broker.hosts.example.com server instead of openshift.com.  In order to accomplish this, the first thing we need to do is run the *rhc setup* command using the optional *--server* parameter.
 
 	$ rhc setup --server broker.hosts.example.com
-	
-Once you enter in that command, you will be prompted for the username that you would like to authenticate with.  For this training class, use the *demo* user account.  
+
+Once you enter in that command, you will be prompted for the username that you would like to authenticate with.  For this training class, use the *demo* user account.  The password configured for this account is *changeme*.
 
 The first thing that you will be prompted with will look like the following:
 
@@ -23,8 +23,8 @@ The first thing that you will be prompted with will look like the following:
 	
 	You may bypass this check, but any data you send to the server could be intercepted by others.
 	Connect without checking the certificate? (yes|no):
-	
-Since we are using a self signed certificate, go ahead and select *yes* here and press the enter key. 
+
+Since we are using a self signed certificate, go ahead and select *yes* here and press the enter key.
 
 At this point, you will be prompted for the username.  Enter in demo and specify the password for the demo user.
 
@@ -45,7 +45,7 @@ The *rhc setup* tool is a convenient command line utility to ensure that the use
 
 	# Server API
 	libra_server = 'broker.hosts.example.com'
-	
+
 This information will be read by the *rhc* command line tool for every future command that is issued.  If you want to run commands as a different user than the one listed above, you can either change the default login in this file or provide the *-l* switch to the *rhc* command.
 
 

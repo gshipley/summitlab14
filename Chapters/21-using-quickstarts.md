@@ -26,7 +26,7 @@ Point your browser to the following URL:
 
     http://www.github.com/openshift
     
-Given the number of available quick starts, you may have to use the search functionality of your browser to locate the quick start that you would like to install.  For this lab, choose either the Wordpress or Drupal quick start and follow the instructions provided to install the application.
+Given the number of available quick starts, you may have to use the search functionality of your browser to locate the quick start that you would like to install.  For this lab, choose either the WordPress or Drupal quick start and follow the instructions provided to install the application.
 
 ![](http://training.runcloudrun.com/images/quickstart.png)
 

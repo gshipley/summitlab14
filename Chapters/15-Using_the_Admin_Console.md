@@ -9,7 +9,7 @@
 
 * OpenShift Enterprise Admin Console
 
-OpenShift Enterprise 2.0 includes the first version of an Admin Console that will allow an Admistrator to gain valuable insights into the usage of the platform.  Having this visibility will allow the adminstrator to perform capacity planning as well as view metrics of the platform as a whole.  
+OpenShift Enterprise 2.0 includes the first version of an Admin Console that will allow an Administrator to gain valuable insights into the usage of the platform.  Having this visibility will allow the administrator to perform capacity planning as well as view metrics of the platform as a whole.
 
 **Note:** The current iteration of the Admin Console is set to read-only.
 
@@ -17,21 +17,29 @@ OpenShift Enterprise 2.0 includes the first version of an Admin Console that wil
 
 The default location for the admin console is at the following URL:
 
-    http://brokers.hosts.example.com/admin-console
+    http://broker.hosts.example.com/admin-console
 
 However, by default the admin console is restricted so that it will not allow external traffic.  In order to enable access to the admin console, you will need to create an SSH tunnel to the broker host.
+
+**Note:** Execute the following on the client host.
+
+	ssh -L 8080:localhost:8080 root@broker.hosts.example.com
+
+The above command will establish a tunnel between localhost:8080 on the host where you run the command (the client host) and localhost:8080 on the remote host (broker.hosts.example.com).
 
 ##**System Overview**
 
 Open your favorite web browser and go to the following URL:
 
-    http://broker.hosts.example.com/admin-console
-    
+    http://localhost:8080/admin-console
+
+**Note:** You must use *http* and not *https*, and you must use *localhost* rather than *broker.hosts.example.com*.
+
 Once you enter the above URL, you will the admin console *System Overview* dashboard.
 
 ![](http://training.runcloudrun.com/ose2/adminconsole1.png)
 
-On this page you can see the information for the number of disticts and nodes that you have deployed in your environment for each available gear type.  In our lab, you will only see a single district with small gears.  However, in a production deployment of OpenShift Enterprise 2.0, the administrator will be able to view information for all available gear types.
+On this page you can see the information for the number of districts and nodes that you have deployed in your environment for each available gear type.  In our lab, you will only see a single district with small gears.  However, in a production deployment of OpenShift Enterprise 2.0, the administrator will be able to view information for all available gear types.
 
 For reference, a production environment may look look like the following image:
 
@@ -47,7 +55,7 @@ At any point in time you can refresh the statistics collected by clicking the re
 
 ##**Viewing Suggestions**
 
-The admin console also provides a suggestion system that will make reccomendations on the current deployment.  In order to view any suggestions click on the *Suggestions* tab at the top of the screen.  During this training lab, our install if a fairly basic deployment with a minimal number of applications created and deployed on the platform.  Because of this, you may not see any suggestions offered from the console.
+The admin console also provides a suggestion system that will make recommendations on the current deployment.  In order to view any suggestions click on the *Suggestions* tab at the top of the screen.  During this training lab, our install if a fairly basic deployment with a minimal number of applications created and deployed on the platform.  Because of this, you may not see any suggestions offered from the console.
 
 Any suggestions will also be displayed on the *System Overview* page on the right hand side of the screen.
 
@@ -69,7 +77,7 @@ On this application detail page, you can view all of the information about the a
 
 ##**Searching for User Entities**
 
-In the previous section, we searched for our application that we created as part of this training class.  We can also use the search funtionality to view detailed information for a user of the platform.  Using the skills you learned in the previous section, search for the *demo* user.
+In the previous section, we searched for our application that we created as part of this training class.  We can also use the search functionality to view detailed information for a user of the platform.  Using the skills you learned in the previous section, search for the *demo* user.
 
 You should see a detail screen listing the applications the user has deployed.
 
