@@ -7,11 +7,11 @@
 
 **Tools used:**
 
-* rhc
+* *rhc*
 
 In this lab, we are ready to start using OpenShift Enterprise to create our first application.  To create an application, we will be using the *rhc app* command.  In order to view all of the switches available for the *rhc app* command, enter the following command:
 
-	$ rhc app -h
+	rhc app -h
 
 This will provide you with the following output:
 
@@ -30,23 +30,23 @@ This will provide you with the following output:
 	                server
 
 
-##**Create a new application**
+##**Creating a new application**
 
 It is very easy to create an OpenShift Enterprise application using *rhc*. The command to create an application is *rhc app create*, and it requires two mandatory arguments:
 
-* **Application Name** : The name of the application. The application name can only contain alpha-numeric characters and at max contain only 32 characters.
+* **Application Name**: The name of the application. The application name can only contain alpha-numeric characters and at max contain only 32 characters.
 
 * **Type**: The type is used to specify which language runtime to use.
 
-Create a directory on your client virtual machine to hold your OpenShift Enterprise code projects:
+Create a directory on your client virtual machine to hold your OpenShift Enterprise code projects, run the following commands:
 
-	$ cd ~
-	$ mkdir ose
-	$ cd ose
+	cd ~
+	mkdir ose
+	cd ose
 
 To create an application that uses the *php* runtime, issue the following command:
 
-	$ rhc app create firstphp php-5.3
+	rhc app create firstphp php-5.3
 
 After entering that command, you should see the following output:
 
@@ -76,13 +76,13 @@ After entering that command, you should see the following output:
 	  Git remote: ssh://52afd7043a0fb277cf000036@firstphp-ose.apps.example.com/~/git/firstphp.git/
 	  Cloned to:  /Users/gshipley/code/ose/firstphp
 	
-	Run 'rhc show-app firstphp' for more details about your app.
+	Run *rhc show-app firstphp* for more details about your app.
 
 If you completed all of the steps in the DNS setup lab correctly, you should be able to verify that your application was created correctly by opening up a web browser and entering the following URL:
 
 	http://firstphp-ose.apps.example.com
 	
-You should see the default template that OpenShift Enterprise uses for a new application.
+You should see the default template that OpenShift Enterprise uses for a new application:
 
 ![](http://training.runcloudrun.com/images/firstphp.png)
 
@@ -90,30 +90,30 @@ You should see the default template that OpenShift Enterprise uses for a new app
 
 After you entered the command to create a new PHP application, a lot of things happened under the covers:
 
-* A request was made to the broker application host to create a new php application.
+* A request was made to the broker application host to create a new PHP application.
 * A message was broadcast using MCollective and ActiveMQ to find a node host to handle the application creation request.
-* A node host responded to the request and created an application / gear for you.
+* A node host responded to the request and created an application/gear for you.
+* A Unix user was created for your application gear.
 * SELinux and cgroup policies were enabled for your application gear.
-* A userid was created for your application gear.
 * A private Git repository was created for your gear on the node host.
 * The Git repository was cloned onto your local machine.
-* BIND was updated on the broker host to include an entry for your application.
+* *BIND* was updated on the broker host to include an entry for your application.
 
 ##**Understanding the directory structure on the node host**
 
 It is important to understand the directory structure of each OpenShift Enterprise application gear.  For the PHP application that we just created, we can verify and examine the layout of the gear on the node host.  SSH to your node host and execute the following commands:
 
-	# cd /var/lib/openshift
-	# ls
+	cd /var/lib/openshift
+	ls
 
 You will see output similar to the following:
 
 	e9e92282a16b49e7b78d69822ac53e1d
 
-The above is the unique user id that was created for your application gear.  Lets examine the contents of this gear by using the following commands:
+The above is the unique user id that was created for your application gear.  Let's examine the contents of this gear by using the following commands:
 
-	# cd e9e92282a16b49e7b78d69822ac53e1d
-	# ls -al
+	cd e9e92282a16b49e7b78d69822ac53e1d
+	ls -al
 
 You should see the following directories:
 
@@ -132,27 +132,27 @@ You should see the following directories:
 	[root@node e9e92282a16b49e7b78d69822ac53e1d]# 
 
 
-During a previous lab, where we setup the *rhc* tools, our SSH key was uploaded to the server to enable us to authenticate to the system without having to provide a password.  The SSH key we provided was actually appended to the *authorized_keys* file.  To verify this, use the following command to view the contents of the file:
+During a previous lab where we set up the *rhc* tool, our SSH key was uploaded to our OpenShift Enterprise PaaS to enable us to authenticate to it without having to provide a password.  The SSH key we provided was actually appended to the *authorized_keys* file.  To verify this, use the following command to view the contents of the file:
 
-	# cat .ssh/authorized_keys
+	cat .ssh/authorized_keys
 
 You will also notice the following three directories:
 
-* app-root - Contains your core application code as well as your data directory where persistent data is stored.
-* git - Your private Git repository that was created upon gear creation.
-* php-5.3 - The core PHP runtime and associated configuration files.  Your application is served from this directory.
+* `app-root` - Contains your core application code as well as your data directory where persistent data is stored.
+* `git` - Your private Git repository that was created upon gear creation.
+* `php-5.3` - The core PHP runtime and associated configuration files.  Your application is served from this directory.
 
 Let's close our SSH session and return to your local machine:
 
-	# exit
+	exit
 
 
 ##**Understanding directory structure on the client machine**
 
-When you created the PHP application using the *rhc app create* command, the private git repository that was created on your node host was cloned to your local machine.
+When you created the PHP application using the *rhc app create* command, the private Git repository that was created on your node host was cloned to your local machine.
 
-	$ cd firstphp
-	$ ls -al
+	cd firstphp
+	ls -al
 
 You should see the following information:
 
@@ -169,11 +169,11 @@ You should see the following information:
 	drwxr-xr-x   4 gshipley  staff   136 Jan 21 13:48 php
 
 
-###**.git directory**
+###***.git/* directory**
 
-If you are not familiar with the Git revision control system, this is where information about the git repositories that you will be interacting with is stored.  For instance, to list all of the repositories that you are currently setup to use for this project, issue the following command:
+If you are not familiar with the Git revision control system, the *.git/* directory is where information about the Git repositories that you will be interacting with is stored.  For instance, to list all of the repositories that you are currently set up to use for this project, issue the following command:
 
-	$ cat .git/config
+	cat .git/config
 
 You should see the following information, which specifies the URL for our repository that is hosted on the OpenShift Enterprise node host:
 
@@ -193,48 +193,46 @@ You should see the following information, which specifies the URL for our reposi
 		app-uuid = e9e92282a16b49e7b78d69822ac53e1d
 
 
-**Note:** You are also able to add other remote repositories.  This is useful for developers who also use Github or have private git repositories for an existing code base.
+**Note:** You are also able to add other remote repositories.  This is useful for developers who also use Github or have private Git repositories for an existing code base.
 
-###**.openshift directory**
+###***.openshift/* directory**
 
-The .openshift directory is a hidden directory where a user can create action hooks, set markers, and create cron jobs.
+The *.openshift/* directory is a hidden directory where a user can create action hooks, set markers, and create cron jobs.
 
 Action hooks are scripts that are executed directly, so they can be written in Python, PHP, Ruby, shell, etc.  OpenShift Enterprise supports the following action hooks:
 
-| Action Hook | Description|
-| :---------------  | :------------ |
-| build | Executed on your CI system if available.  Otherwise, executed before the deploy step | 
-| deploy | Executed after dependencies are resolved but before application has started | 
-| post_deploy | Executed after application has been deployed and started| 
-| pre_build | Executed on your CI system if available.  Otherwise, executed before the build step | 
-[Action Hooks][section-mmd-tables-table1] 
++---------------+---------------------------------------------------------------------------------------+
+| Action Hook   | Description                                                                           |
++===============+=======================================================================================+
+| *build*       | Executed on your CI system if available.  Otherwise, executed before the deploy step. |
++---------------+---------------------------------------------------------------------------------------+
+| *deploy*      | Executed after dependencies are resolved but before application has started.          |
++---------------+---------------------------------------------------------------------------------------+
+| *post_deploy* | Executed after application has been deployed and started.                             |
++---------------+---------------------------------------------------------------------------------------+
+| *pre_build*   | Executed on your CI system if available.  Otherwise, executed before the build step.  |
++---------------+---------------------------------------------------------------------------------------+
 
-OpenShift Enterprise also supports the ability for a user to schedule jobs to be run based upon the familiar cron functionality of Linux.  To enable this functionality, you need to add the cron cartridge to your application.  Once you have done so, any scripts or jobs added to the minutely, hourly, daily, weekly or monthly directories will be run on a scheduled basis (frequency is as indicated by the name of the directory) using run-parts.  OpenShift supports the following schedule for cron jobs:
+OpenShift Enterprise also supports the ability for a user to schedule jobs to be run based upon the familiar *cron* functionality of Linux.  To enable this functionality, you need to add the cron cartridge to your application.  Once you have done so, any scripts or jobs added to the *minutely/*, *hourly/*, *daily/*, *weekly/*, or *monthly/* subdirectories under the *.openshift/cron/* directory will be run on a scheduled basis (frequency is as indicated by the name of the directory) using *run-parts*.
 
-* daily
-* hourly
-* minutely
-* monthly
-* weekly
+The *.openshift/markers/* directory will allow the user to specify settings such as enabling hot deployments or which version of Java to use.
 
-The markers directory will allow the user to specify settings such as enabling hot deployments or which version of Java to use.
+###***libs/* directory**
 
-###**libs directory**
+The *libs/* directory is a location where the developer can provide any dependencies that are not able to be deployed using the standard dependency resolution system for the selected runtime.  In the case of PHP, the standard convention that OpenShift Enterprise uses is providing *PEAR* modules in the *deplist.txt* file.
 
-The libs directory is a location where the developer can provide any dependencies that are not able to be deployed using the standard dependency resolution system for the selected runtime.  In the case of PHP, the standard convention that OpenShift Enterprise uses is providing *PEAR* modules in the deplist.txt file.
+###***misc/* directory**
 
-###**misc directory**
+The *misc/* directory is a location provided to the developer to store any application code that they do not want exposed publicly.
 
-The misc directory is a location provided to the developer to store any application code that they do not want exposed publicly.
+###***php/* directory**
 
-###**php directory**
+The *php/* directory is where all of the application code that the developer writes should be created.  By default, two files are created in this directory:
 
-The php directory is where all of the application code that the developer writes should be created.  By default, two files are created in this directory:
+* *health_check.php* - A simple file to determine if the application is responding to requests.
+* *index.php* - The OpenShift template that we saw after application creation in the web browser.
 
-* health_check.php - A simple file to determine if the application is responding to requests
-* index.php - The OpenShift template that we saw after application creation in the web browser.
-
-##**Make a change to the PHP application and deploy updated code**
+##**Deploying updated code**
 
 To get a good understanding of the development workflow for a user, let's change the contents of the *index.php* template that is provided on the newly created gear.  Edit the file and look for the following code block:
 
@@ -248,16 +246,16 @@ Update this code block to the following and then save your changes:
 	    Welcome to OpenShift Enterprise
 	</h1>
 
-**Note:** Make sure you are updating the \<h1> tag and not the \<title> tag.
+**Note:** Make sure you are updating the `<h1>` tag and not the `<title>` tag.
 
 Once the code has been changed, we need to commit our change to the local Git repository.  This is accomplished with the *git commit* command:
 
-	$ git commit -am "Changed welcome message."
-	
-Now that our code has been committed to our local repository, we need to push those changes up to our repository that is located on the node host.  
+	git commit -am "Changed welcome message."
 
-	$ git push
-	
+Now that our code has been committed to our local repository, we need to push those changes up to our repository that is located on the node host:
+
+	git push
+
 You should see the following output:
 
 	Counting objects: 7, done.
@@ -283,10 +281,7 @@ You should see the following output:
 	   3edf63b..edc0805  master -> master
 
 
-Notice that we stop the application runtime (Apache), deploy the code, and then run any action hooks that may have been specified in the .openshift directory.  
-
-
-##**Verify code change**
+Notice that OpenShift stops the application runtime (Apache), deploys the code, and then runs any action hooks that may have been specified in the *.openshift/* directory.  
 
 If you completed all of the steps in Lab 16 correctly, you should be able to verify that your application was deployed correctly by opening up a web browser and entering the following URL:
 
@@ -298,28 +293,26 @@ You should see the updated code for the application.
 
 ##**Adding a new PHP file**
 
-Adding a new source code file to your OpenShift Enterprise application is an easy and straightforward process.  For instance, to create a PHP source code file that displays the server date and time, create a new file located in *php* directory and name it *time.php*.  After creating this file, add the following contents:
+Adding a new source-code file to your OpenShift Enterprise application is an easy and straightforward process.  For instance, to create a PHP source-code file that displays the server date and time, create a new file located in the *php/* directory and name it *time.php*.  After creating this file, add the following contents:
 
 	<?php
 	// Print the date and time
 	echo date('l jS \of F Y h:i:s A');
 	?>
 
-Once you have saved this file, the process for pushing the changes involves adding the new file to your git repository, committing the change, and then pushing the code to your OpenShift Enterprise gear:
+Once you have saved this file, the process for pushing the changes involves adding the new file to your Git repository, committing the change, and then pushing the code to your OpenShift Enterprise gear:
 
-	$ git add .
-	$ git commit -am "Adding time.php"
-	$ git push
-
-##**Verify code change**
+	git add .
+	git commit -am "Adding time.php"
+	git push
 
 To verify that we have created and deployed the new PHP source file correctly, open up a web browser and enter the following URL:
 
 	http://firstphp-ose.example.com/time.php
 
-You should see the updated code for the application.
+You should see the updated code for the application:
 
 ![](http://training.runcloudrun.com/images/firstphpTime.png)
 
-**Lab 007 Complete!**
+**Lab 7 Complete!**
 <!--BREAK-->
