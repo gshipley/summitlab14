@@ -1,7 +1,7 @@
 #**Lab 12: Scaling an application**
 
 
-**Server used:**
+**Servers used:**
 
 * client host
 * node host
@@ -60,7 +60,7 @@ After executing the above command, you should see output that indicates that sca
 	  URL:        http://scaledapp-ose.apps.example.com/
 	  SSH to:     52b209683a0fb2bc1d000030@scaledapp-ose.apps.example.com
 	  Git remote: ssh://52b209683a0fb2bc1d000030@scaledapp-ose.apps.example.com/~/git/scaledapp.git/
-	  Cloned to:  /Users/gshipley/code/ose/scaledapp
+	  Cloned to:  /home/demo/ose/scaledapp
 
 	Run 'rhc show-app scaledapp' for more details about your app.
 
@@ -91,7 +91,7 @@ From your locally cloned Git repository, create a *disable autoscaling* marker, 
 
 	touch .openshift/markers/disable_auto_scaling
 	git add .
-	git commit -am “remove automatic scaling”
+	git commit -am "remove automatic scaling"
 	git push
 
 To add a new gear to your application, SSH to your application gear with the following command, replacing the contents with the correct information for your application.  Alternatively, you can use the *rhc app ssh* command.

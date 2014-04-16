@@ -1,7 +1,7 @@
 #**Lab 11: Using the admin console**
 
 
-**Server used:**
+**Servers used:**
 
 * client host
 * broker host
@@ -42,7 +42,7 @@ Once you enter the above URL, you will see the admin console *System Overview* d
 
 On this page, you can see the information for the number of districts and nodes that you have deployed in your environment for each available gear type.  In our lab, you will only see a single district with small gears.  However, in a production deployment of OpenShift Enterprise 2.0, the administrator will be able to view information for all available gear types.
 
-For reference, a production environment may look look like the following image:
+For reference, a production environment may look like the following image:
 
 ![](http://training.runcloudrun.com/ose2/adminconsole2.png)
 

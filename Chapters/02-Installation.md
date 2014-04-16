@@ -1,8 +1,9 @@
 #**Lab 2: Installing OpenShift Enterprise 2.0**
 
-**Server used:**
+**Servers used:**
 
 * broker host
+* node host
 
 **Tools used:**
 
@@ -54,7 +55,11 @@ Because we are telling *openshift.sh* to install a nameserver alongside the Open
 
 Let's go ahead and execute the command to run installation script.
 
-For own use, set the *host1* and *host2* environment variables:
+First, make sure you are connected to the *lab7-broker* virtual machine that has been provided to you in this lab.  Open a terminal window and connect to the VM using SSH:
+
+	ssh root@172.16.1.2
+
+Log in with the password 'redhat'.  Once you are connected to the correct host, set the *host1* and *host2* environment variables, for our own use:
 
 **Note:** Execute the following command on the broker host.
 
@@ -89,6 +94,7 @@ While the installation script runs on the OpenShift broker host, open a console 
 To install and configure the OpenShift node host, we will want to specify the following settings to *openshift.sh*:
 
 * *install_components=node*
+* *cartridges=all,-jboss,-jenkins,-postgres,-diy*
 * *domain=apps.example.com*
 * *hosts_domain=hosts.example.com*
 * *named_ip_addr={host1 IP address}*
@@ -96,9 +102,9 @@ To install and configure the OpenShift node host, we will want to specify the fo
 
 Following is an explanation for each of these arguments.
 
-### *install_components* setting ###
+### *install_components* and *cartridges* settings ###
 
-We will specify the *install_components* setting for this host to configure it as an OpenShift node host.
+We will specify the *install_components* setting for this host to configure it as an OpenShift node host.  For node hosts, it is possible to specify the list of *cartridges* that *openshift.sh* will install on the host.  Cartridges provide functionality to application developers and will be explained in the lecture.  For now, we want to specify a limited set of cartridges to install in order to reduce the installation time in this lab.
 
 ### *domain* and *host_domain* settings ###
 
@@ -114,7 +120,11 @@ The *node_hostname* setting specifies the fully-qualified hostname that the inst
 
 ### Executing *openshift.sh* ###
 
-Before we execute the command to run installation script, let's set the *host1* and *host2* environment variables as we did on the broker host:
+First, make sure you are connected to the *lab7-node* virtual machine.  Open a terminal window and connect to the VM using SSH:
+
+	ssh root@172.16.1.3
+
+Log in with the password 'redhat'.  Before we execute the command to run installation script, let's set the *host1* and *host2* environment variables as we did on the broker host:
 
 **Note:** Perform the following command on the node host.
 
@@ -123,6 +133,7 @@ Before we execute the command to run installation script, let's set the *host1* 
 Next, set the following environment variables:
 
 	export CONF_INSTALL_COMPONENTS=node
+	export CONF_CARTRIDGES=all,-jboss,-jenkins,-postgres,-diy
 	export CONF_DOMAIN=apps.example.com
 	export CONF_HOSTS_DOMAIN=hosts.example.com
 	export CONF_NAMED_IP_ADDR=$host1

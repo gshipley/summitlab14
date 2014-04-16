@@ -2,11 +2,11 @@
 
 **Server used:**
 
-* node host
 * broker host
 
 **Tools used:**
 
+* *cat*
 * text editor
 * *oo-admin-ctl-user*
 
@@ -45,21 +45,27 @@ To see how many gears our *demo* user has consumed as well as how many gears the
 Given the current state of our configuration for this training class, you should see the following output:
 
 	User demo:
+	    ...
 	    consumed gears: 0
 	    max gears: 100
 	    gear sizes: small
+	    ...
+
+**Note:** The above output has been abbreviated.
 
 In order to change the number of gears that our *demo* user has permission to create, you can pass the `--setmaxgears` switch to the command.  For instance, if we only want to allow the *demo* user to be able to create 25 gears, we would use the following command:
 
 	oo-admin-ctl-user -l demo --setmaxgears 25
 
-After entering the above command, you should see the following output:
+After entering the above command, you should see the following output (abbreviated):
 
- 	Setting max_gears to 25... Done.
- 	User demo:
- 	  consumed gears: 0
- 	  max gears: 25
- 	  gear sizes: small
+	Setting max_gears to 25... Done.
+	User demo:
+	    ...
+	    consumed gears: 0
+	    max gears: 25
+	    gear sizes: small
+	    ...
 
 
 ##**Defining new gear types**

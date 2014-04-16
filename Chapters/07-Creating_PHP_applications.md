@@ -1,6 +1,6 @@
 #**Lab 7: Creating a PHP application**
 
-**Server used:**
+**Servers used:**
 
 * client host
 * node host
@@ -74,7 +74,7 @@ After entering that command, you should see the following output:
 	  URL:        http://firstphp-ose.apps.example.com/
 	  SSH to:     52afd7043a0fb277cf000036@firstphp-ose.apps.example.com
 	  Git remote: ssh://52afd7043a0fb277cf000036@firstphp-ose.apps.example.com/~/git/firstphp.git/
-	  Cloned to:  /Users/gshipley/code/ose/firstphp
+	  Cloned to:  /home/demo/ose/firstphp
 	
 	Run *rhc show-app firstphp* for more details about your app.
 
@@ -140,7 +140,7 @@ You will also notice the following three directories:
 
 * `app-root` - Contains your core application code as well as your data directory where persistent data is stored.
 * `git` - Your private Git repository that was created upon gear creation.
-* `php-5.3` - The core PHP runtime and associated configuration files.  Your application is served from this directory.
+* `php` - The core PHP runtime and associated configuration files.  Your application is served from this directory.
 
 Let's close our SSH session and return to your local machine:
 
@@ -158,15 +158,15 @@ You should see the following information:
 
 
 	total 8
-	drwxr-xr-x   9 gshipley  staff   306 Jan 21 13:48 .
-	drwxr-xr-x   3 gshipley  staff   102 Jan 21 13:48 ..
-	drwxr-xr-x  13 gshipley  staff   442 Jan 21 13:48 .git
-	drwxr-xr-x   5 gshipley  staff   170 Jan 21 13:48 .openshift
-	-rw-r--r--   1 gshipley  staff  2715 Jan 21 13:48 README
-	-rw-r--r--   1 gshipley  staff     0 Jan 21 13:48 deplist.txt
-	drwxr-xr-x   3 gshipley  staff   102 Jan 21 13:48 libs
-	drwxr-xr-x   3 gshipley  staff   102 Jan 21 13:48 misc
-	drwxr-xr-x   4 gshipley  staff   136 Jan 21 13:48 php
+	drwxr-xr-x   9 demo  demo   306 Jan 21 13:48 .
+	drwxr-xr-x   3 demo  demo   102 Jan 21 13:48 ..
+	drwxr-xr-x  13 demo  demo   442 Jan 21 13:48 .git
+	drwxr-xr-x   5 demo  demo   170 Jan 21 13:48 .openshift
+	-rw-r--r--   1 demo  demo  2715 Jan 21 13:48 README
+	-rw-r--r--   1 demo  demo     0 Jan 21 13:48 deplist.txt
+	drwxr-xr-x   3 demo  demo   102 Jan 21 13:48 libs
+	drwxr-xr-x   3 demo  demo   102 Jan 21 13:48 misc
+	drwxr-xr-x   4 demo  demo   136 Jan 21 13:48 php
 
 
 ###***.git/* directory**
@@ -199,7 +199,7 @@ You should see the following information, which specifies the URL for our reposi
 
 The *.openshift/* directory is a hidden directory where a user can create action hooks, set markers, and create cron jobs.
 
-Action hooks are scripts that are executed directly, so they can be written in Python, PHP, Ruby, shell, etc.  OpenShift Enterprise supports the following action hooks:
+Action hooks are scripts under the *.openshift/action_hooks/* directory that are executed directly by OpenShift, so they can be written in Python, PHP, Ruby, shell, etc.  OpenShift Enterprise supports the following action hooks:
 
 +---------------+---------------------------------------------------------------------------------------+
 | Action Hook   | Description                                                                           |

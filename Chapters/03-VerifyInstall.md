@@ -1,15 +1,17 @@
 
 #**Lab 3: Verifying the installation**
 
-**Server used:**
+**Servers used:**
 
 * broker host
+* node host
 
 **Tools used:**
 
+* *service*
 * *cat*
 * *ping*
-* *oo-diagnositcs*
+* *oo-diagnostics*
 * *oo-mco* 
 * *mongo*
 * *shutdown*
@@ -35,6 +37,8 @@ Wait for your node host to come back online.
 ###**Verifying DNS nameserver**
 Now that our broker and node hosts have been restarted, we can verify that some of the core services have started upon system boot.  The first one want to test is the named service, provided by *BIND*.  In order to test that *BIND* was started successfully, enter in the following command:
 
+**Note:** Perform the following command on the broker host.
+
 	service named status
 	
 You should see information similar to the following:
@@ -57,6 +61,8 @@ If *BIND* is up and running, we can feel assured that there are no syntax errors
 
 The next aspect of DNS that we can verify is the actual database for our DNS records.  There should be two database files that contain the domain information for our hosts.  Let's verify that the DNS information for our hosts.example.com zone has been setup correctly with the following command:
 
+**Note:** Perform the following command on the broker host.
+
 	cat /var/named/dynamic/hosts.example.com.db
 
 The output should look similar to the following.
@@ -73,12 +79,15 @@ The output should look similar to the following.
 				NS	broker.hosts.example.com.
 				MX	10 mail.hosts.example.com.
 	$ORIGIN hosts.example.com.
-	broker			A	172.16.1.2
-	activemq			A	172.16.1.2
-	datastore			A	172.16.1.2
-	node			A	172.16.1.3
+	ns1			IN A	172.16.1.2
+	broker			IN A	172.16.1.2
+	activemq			IN A	172.16.1.2
+	datastore			IN A	172.16.1.2
+	node			IN A	172.16.1.3
 
 Verify that you have entries for both the broker and the node host listed in the output of the *cat* command.  Once you have verified this, take a look at the database for the apps.example.com zone to verify that is has an *NS* entry for *broker.hosts.example.com*:
+
+**Note:** Perform the following command on the broker host.
 
 	cat /var/named/dynamic/apps.example.com.db
 
@@ -128,11 +137,21 @@ If MCollective is working correctly, you should see the following output (the ti
 
 OpenShift Enterprise ships with a diagnostics utility that can check the health and state of your installation.  The utility may take a few minutes to run as it inspects your hosts.  In order to run this tool, simply enter the following command:
 	
-**Note:** Execute the following on the broker host
+**Note:** Execute the following on both the broker host and the node host.
 
 	oo-diagnostics
-	
+
 When running the *oo-diagnostics* script at this time, it is expected to see some warnings as we have not yet setup districts for our installation.  You may also see an error regarding the verification of the security certificate.
+
+Note that you can run the same `oo-diagnostics` command on both the broker host and the node host because `oo-diagnostics` will detect the type of host on which it is executed and run only the tests that are appropriate for that type of host.
+
+###**Calling the REST API**
+
+OpenShift client tools, including the *rhc* command-line tool as well as the web- and IDE-based interfaces, all communicate with the broker using a RESTful HTTP-based interface.  Use the *curl* command to verify that the broker's REST interface is functional:
+
+	curl -k -u demo:changeme https://broker.hosts.example.com/broker/rest/applications
+
+You should see a short JSON response.
 
 **Lab 3 Complete!**
 <!--BREAK-->

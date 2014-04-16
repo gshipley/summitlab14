@@ -1,6 +1,6 @@
 #**Lab 5: Managing districts**
 
-**Server used:**
+**Servers used:**
 
 * node host
 * broker host
@@ -127,6 +127,8 @@ You should see the following information in the *server_identities* array.
 	"server_identities" : [ { "name" : "node.hosts.example.com", "active" : true } ]
 
 If you continued to add additional nodes to this district, the *server_identities* array would show all the node hosts assigned to the district.
+
+You can exit the mongo shell as you did before with the `exit` command.
 
 OpenShift Enterprise also provides a command-line tool to display information about a district.  Simply enter the following command to view the JSON information that is stored in the MongoDB database:
 

@@ -1,6 +1,6 @@
 #**Lab 8: Managing an application**
 
-**Server used:**
+**Servers used:**
 
 * client host
 * node host
@@ -85,10 +85,6 @@ All of the details about an application can be viewed by the *rhc app show* comm
 The state of application gears can be viewed by passing the `--state` switch to the *rhc app show* command, as shown below:
 
 	rhc app show --state firstphp
-	Password: ****
-	
-	
-	RESULT:
 	Cartridge php-5.3 is started
 
 
@@ -267,7 +263,7 @@ Technically, what OpenShift Enterprise has done under the hood is set up a Vhost
 
 ##**Adding a custom domain to an application using the management console**
 
-The OpenShift management console allows you to configure a custom domain for your application without using the command-line tools.  Point your browser to *broker.hosts.example.com* and authenticate.  After you have authenticated to the management console, click on the *Applications* tab at the top of the screen.
+The OpenShift management console allows you to configure a custom domain for your application without using the command-line tools.  Point your browser to *broker.hosts.example.com* and authenticate.  After you have authenticated to the management console, click on the *Applications* tab at the top of the screen, and then click on *firstphp*.
 
 You should see the *firstphp* application listed:
 
@@ -300,9 +296,9 @@ If the alias was added correctly, you should see the following output:
 
 If you point your web browser to www.openshiftrocks.com, you will notice that it does not work.  This is because the domain name has not been setup with a DNS registry.  In order to verify that the vhost was added, add an entry in your */etc/hosts* file on your local machine.
 
-	sudo vi /etc/hosts
+	su -c 'vi /etc/hosts'
 
-Add the following entry:
+Provide the password 'redhat' to the `su` command.  Add the following entry to `/etc/hosts`:
 
 	172.16.1.3  www.openshiftrocks.com
 
@@ -315,8 +311,6 @@ Once you have verified that the vhost was added correctly by viewing the site in
 Use the *rhc snapshot save* command to create backups of your OpenShift Enterprise application. This command creates a gzipped tar file of your application and of any locally-created log and data files.  This snapshot is downloaded to your local machine.  The directory structure that exists on the server is maintained in the downloaded archive.
 
 	rhc snapshot save firstphp
-	Password: ****
-	
 	Pulling down a snapshot to firstphp.tar.gz...
 	Waiting for stop to finish
 	Done

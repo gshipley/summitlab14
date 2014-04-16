@@ -1,6 +1,6 @@
 #**Lab 9: Using cartridges**
 
-**Server used:**
+**Servers used:**
 
 * client host
 * node host
@@ -29,8 +29,6 @@ To see a list of all available cartridges to users of this OpenShift Enterprise 
 
 You should see the following output depending on which cartridges you have installed:
 
-	jbosseap-6       JBoss Enterprise Application Platform 6.1.0 web
-	jenkins-1        Jenkins Server                              web
 	nodejs-0.10      Node.js 0.10                                web
 	perl-5.10        Perl 5.10                                   web
 	php-5.3          PHP 5.3                                     web
@@ -38,14 +36,8 @@ You should see the following output depending on which cartridges you have insta
 	python-2.7       Python 2.7                                  web
 	ruby-1.8         Ruby 1.8                                    web
 	ruby-1.9         Ruby 1.9                                    web
-	jbossews-1.0     Tomcat 6 (JBoss EWS 1.0)                    web
-	jbossews-2.0     Tomcat 7 (JBoss EWS 2.0)                    web
-	diy-0.1          Do-It-Yourself 0.1                          web
 	cron-1.4         Cron 1.4                                    addon
-	jenkins-client-1 Jenkins Client                              addon
 	mysql-5.1        MySQL 5.1                                   addon
-	postgresql-8.4   PostgreSQL 8.4                              addon
-	postgresql-9.2   PostgreSQL 9.2                              addon
 	haproxy-1.4      Web Load Balancer                           addon
 
 Note: Web cartridges can only be added to new applications.
@@ -56,8 +48,8 @@ Note: Web cartridges can only be added to new applications.
 In order to use a cartridge, we need to embed it into our existing application.  OpenShift Enterprise provides support for version 5.1 of the popular MySQL open source database.  To enable MySQL support for the *firstphp* application, issue the following command:
 
 	rhc cartridge add mysql-5.1 -a firstphp
-	
-	You should see the following output:
+
+You should see the following output:
 
 	Adding mysql-5.1 to application 'firstphp' ... done
 
@@ -227,8 +219,6 @@ OpenShift Enterprise also provides the ability to list important information abo
 
 The user will then be presented with the following output:
 
-	Password: ****
-
 	mysql-5.1 (MySQL 5.1)
 	---------------------
 	  Gears:          Located with php-5.3
@@ -260,7 +250,7 @@ Now that you have your services forward, you can connect to them using local cli
 
 	mysql -uadmin -p -h 127.0.0.1
 
-**Note:** The above command assumes that you have the MySQL client installed locally.
+**Note:** The above command will not work because assumes that you have the MySQL client installed locally, and the systems that have been provided to you do not have it installed.
 
 ##**Enabling *hot_deploy***
 
