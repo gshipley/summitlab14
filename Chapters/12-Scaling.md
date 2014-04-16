@@ -1,40 +1,40 @@
 #**Lab 12: Scaling an application**
 
 
-**Server used:**
+**Servers used:**
 
-* localhost
+* client host
 * node host
 
 **Tools used:**
 
-* rhc
-* ssh
-* git
-* touch
-* pwd
+* *rhc*
+* *ssh*
+* *git*
+* *touch*
+* *pwd*
 
 Application scaling enables your application to react to changes in HTTP traffic and automatically allocate the necessary resources to handle the current demand. The OpenShift Enterprise infrastructure monitors incoming web traffic and automatically adds additional gears to satisfy the demand your application is receiving.
 
 ##**How scaling works**
 
-If you create a non-scaled application, the web cartridge occupies only a single gear and all traffic is sent to that gear. When you create a scaled application, it can consume multiple gears: one for the high-availability proxy (HAProxy) itself, and one or more for your actual application. If you add other cartridges like PostgreSQL or MySQL to your application, they are installed on their own dedicated gears.
+If you create a non-scaled application, the web cartridge occupies only a single gear, and all traffic is sent to that gear. When you create a scaled application, it can consume multiple gears: one for the high-availability proxy (HAProxy) itself, and one or more for your actual application. If you add other cartridges like PostgreSQL or MySQL to your application, they are installed on their own dedicated gears.
 
-The HAProxy cartridge sits between your application and the network and routes web traffic to your web cartridges. When traffic increases, HAProxy notifies the OpenShift Enterprise servers that it needs additional capacity. OpenShift checks that you have a free gear (out of your max number of gears) and then creates another copy of your web cartridge on that new gear. The code in the Git repository is copied to each new gear, but the data directory begins empty. When the new cartridge copy starts, it will invoke your build hooks and then HAProxy will begin routing web requests to it. If you push a code change to your web application, all of the running gears will get that update.
+The HAProxy cartridge sits between your application and the network and routes web traffic to your web cartridges. When traffic increases, HAProxy notifies the OpenShift Enterprise servers that it needs additional capacity. OpenShift checks that you have a free gear (out of your max number of gears) and then creates another copy of your web cartridge on that new gear. The code in the Git repository is copied to each new gear, but the data directory begins empty. When the new cartridge copy starts, it will invoke your build hooks, and then HAProxy will begin routing web requests to it. If you push a code change to your web application, all of the running gears will get that update.
 
-The algorithm for scaling up and scaling down is based on the number of concurrent requests to your application. OpenShift Enterprise allocates 10 connections per gear - if HAProxy sees that you're sustaining 90% of your peak capacity, it adds another gear. If your demand falls to 50% of your peak capacity for several minutes, HAProxy removes that gear. Simple!
+The algorithm for scaling up and scaling down is based on the number of concurrent requests to your application. OpenShift Enterprise allocates 10 connections per gear---if HAProxy sees that you're sustaining 90% of your peak capacity, it adds another gear. If your demand falls to 50% of your peak capacity for several minutes, HAProxy removes that gear. Simple!
 
-Because each cartridge is "share-nothing", if you want to share data between web cartridges, you can use a database cartridge. Each of the gears created during scaling has access to the database and can read and write consistent data. As OpenShift Enterprise grows, we anticipate adding more capabilities like shared storage, scaled databases, and shared caching.
+Because each cartridge is "share-nothing," if you want to share data between web cartridges, you can use a database cartridge. Each of the gears created during scaling has access to the database and can read and write consistent data. As OpenShift Enterprise grows, we anticipate adding more capabilities like shared storage, scaled databases, and shared caching.
 
 The OpenShift Enterprise management console shows you how many gears are currently being consumed by your application. We have lots of great things coming for web application scaling, so stay tuned.
 
-##**Create a scaled application**
+##**Creating a scaled application**
 
-In order to create a scaled application using the *rhc* command line tools, you need to specify the *-s* switch to the command.  Let's create a scaled PHP application with the following command:
+In order to create a scaled application using the *rhc* command line tools, you need to specify the `-s` switch to the command.  Let's create a scaled PHP application with the following command:
 
-	$ rhc app create scaledapp php-5.3 -s
+	rhc app create scaledapp php-5.3 -s
 
-After executing the above command, you should see output that specifies that scaling is enabled:
+After executing the above command, you should see output that indicates that scaling is enabled:
 
 	Application Options
 	-------------------
@@ -60,11 +60,11 @@ After executing the above command, you should see output that specifies that sca
 	  URL:        http://scaledapp-ose.apps.example.com/
 	  SSH to:     52b209683a0fb2bc1d000030@scaledapp-ose.apps.example.com
 	  Git remote: ssh://52b209683a0fb2bc1d000030@scaledapp-ose.apps.example.com/~/git/scaledapp.git/
-	  Cloned to:  /Users/gshipley/code/ose/scaledapp
+	  Cloned to:  /home/demo/ose/scaledapp
 
 	Run 'rhc show-app scaledapp' for more details about your app.
 
-Log in to the management console with your browser and click on the *scaledapp* application.  You will notice while looking at the gear details that it lists the number of gears that your application is currently using.
+Log in to the management console with your browser and click on the *scaledapp* application.  You will notice while looking at the gear details that it lists the number of gears that your application is currently using:
 
 ![](http://training.runcloudrun.com/ose2/scaledApp.png)
 
@@ -74,7 +74,7 @@ OpenShift Enterprise allows users the ability to set the minimum and maximum num
 
 ![](http://training.runcloudrun.com/ose2/scaledApp2.png)
 
-Change this setting to scale to 5 gears and click the save button.  Verify that the change is reflected in the management console by clicking on your application under the *Applications* tab.
+Change this setting to scale to 5 gears and click the *Save* button.  Verify that the change is reflected in the management console by clicking on your application under the *Applications* tab.
 
 ![](http://training.runcloudrun.com/ose2/scaledApp3.png)
 
@@ -82,35 +82,35 @@ Change this setting to scale to 5 gears and click the save button.  Verify that 
 
 There are often times when a developer will want to disable automatic scaling in order to manually control when a new gear is added to an application.  Some examples of when manual scaling may be preferred over automatic scaling could include the following:
 
-* If you are anticipating a certain load on your application and wish to scale it accordingly.
+* You are anticipating a certain load on your application and wish to scale it accordingly.
 * You have a fixed set of resources for your application.
 
 OpenShift Enterprise supports this workflow by allowing users to manually add and remove gears for an application.  The instructions below describe how to disable the automatic scaling feature. It is assumed you have already created your scaled application as detailed in this lab and are at the root level directory for the application.
 
 From your locally cloned Git repository, create a *disable autoscaling* marker, as shown in the example below:
 
-	$ touch .openshift/markers/disable_auto_scaling
-	$ git add .
-	$ git commit -am “remove automatic scaling”
-	$ git push
+	touch .openshift/markers/disable_auto_scaling
+	git add .
+	git commit -am "remove automatic scaling"
+	git push
 
 To add a new gear to your application, SSH to your application gear with the following command, replacing the contents with the correct information for your application.  Alternatively, you can use the *rhc app ssh* command.
 
-	$ ssh [AppUUID]@[AppName]-[DomainName].example.com
+	ssh [AppUUID]@[AppName]-[DomainName].example.com
 
 Once you have have been authenticated to your application gear, you can add a new gear with the following command:
 
-	$ add-gear -a [AppName] -u [AppUUID] -n [DomainName]
+	add-gear -a [AppName] -u [AppUUID] -n [DomainName]
 
-In this lab, the application name is *scaledapp*, the application UUID is the username that you used to SSH to the node host, and the domain name is *ose*.  Given that information, your command should looking similar to the following:
+In this lab, the application name is *scaledapp*, the application UUID is the username that you used to SSH to the node host, and the domain name is *ose*.  Given that information, your command should look similar to the following:
 
 	[scaledapp-ose.example.com ~]\> add-gear -a scaledapp -u 1a6d471841d84e8aaf25222c4cdac278 -n ose
 
 Verify that your new gear was added to the application by running the *rhc app show* command or by looking at the application details on the management console:
 
-	$ rhc app show scaledapp
+	rhc app show scaledapp
 
-After executing this command, you should see the application is now using two gears.
+After executing this command, you should see the application is now using two gears:
 
 	scaledapp @ http://scaledapp-ose.apps.example.com/ (uuid: 52b209683a0fb2bc1d000030)
 	-----------------------------------------------------------------------------------
@@ -135,9 +135,9 @@ Just as we scaled up with the *add-gear* command, we can manually scale down wit
 
 	[scaledapp-ose.example.com ~]\> remove-gear -a scaledapp -u 1a6d471841d84e8aaf25222c4cdac278 -n ose
 
-After removing the gear with the *remove-gear* command, verify that the application only contains one gear, HAProxy and a single runtime gear:
+After removing the gear with the *remove-gear* command, verify that the application only contains one gear---HAProxy and a single runtime gear:
 
-	$  rhc app show scaledapp
+	 rhc app show scaledapp
 	
 	scaledapp @ http://scaledapp-ose.apps.example.com/ (uuid: 52b209683a0fb2bc1d000030)
 	-----------------------------------------------------------------------------------
